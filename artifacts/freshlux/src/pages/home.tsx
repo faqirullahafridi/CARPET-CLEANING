@@ -25,8 +25,19 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-32 overflow-hidden bg-background">
-        <div className="container max-w-7xl mx-auto px-6 relative z-10">
+      <section className="relative min-h-[92vh] flex items-center pt-24 pb-32 overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={SITE_IMAGES.hero}
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/92 to-background/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/40" />
+        </div>
+
+        <div className="container max-w-7xl mx-auto px-6 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
               variants={staggerContainer}
@@ -34,18 +45,18 @@ export default function Home() {
               animate="show"
             >
               <motion.div variants={fadeUp} className="w-12 h-0.5 bg-accent mb-6" />
-              <motion.div variants={fadeUp} className="text-primary font-bold tracking-widest uppercase text-sm mb-4">
+              <motion.div variants={fadeUp} className="text-accent font-bold tracking-widest uppercase text-sm mb-4">
                 Trusted by 10,000+ UK Homes
               </motion.div>
               <motion.h1
                 variants={fadeUp}
-                className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-foreground leading-tight"
+                className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-white leading-tight"
               >
                 Professional Carpet Cleaning Across the UK
               </motion.h1>
               <motion.p
                 variants={fadeUp}
-                className="text-lg md:text-xl text-muted-foreground mb-10 max-w-xl font-medium"
+                className="text-lg md:text-xl text-white/80 mb-10 max-w-xl font-medium"
               >
                 Book trusted professional cleaners in minutes with instant pricing and same-day availability.
               </motion.p>
@@ -54,28 +65,28 @@ export default function Home() {
                 className="flex flex-col sm:flex-row items-center gap-4 mb-12"
               >
                 <Link href="/book" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-primary hover:bg-primary/90 text-white transition-all rounded-lg" data-testid="button-hero-book">
+                  <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-primary hover:bg-primary/90 text-white transition-all rounded-lg shadow-lg shadow-primary/25" data-testid="button-hero-book">
                     Book Cleaning
                   </Button>
                 </Link>
                 <Link href="/services" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border border-border hover:bg-muted text-foreground rounded-lg" data-testid="button-hero-services">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border border-white/30 bg-white/5 text-white hover:bg-white/10 hover:text-white rounded-lg backdrop-blur-sm" data-testid="button-hero-services">
                     View Services
                   </Button>
                 </Link>
               </motion.div>
 
-              <motion.div variants={fadeUp} className="flex items-center gap-6 text-sm font-semibold text-foreground">
+              <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-6 text-sm font-semibold text-white/90">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-accent" />
                   <span>10,000+ Homes</span>
                 </div>
-                <div className="w-px h-4 bg-border" />
+                <div className="hidden sm:block w-px h-4 bg-white/20" />
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-accent" />
                   <span>Same-Day</span>
                 </div>
-                <div className="w-px h-4 bg-border" />
+                <div className="hidden sm:block w-px h-4 bg-white/20" />
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-accent" />
                   <span>Fully Insured</span>
@@ -87,37 +98,34 @@ export default function Home() {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="hidden lg:block relative"
+              className="hidden lg:flex justify-end"
             >
-              <div className="relative rounded-2xl overflow-hidden border border-border shadow-xl">
-                <img
-                  src={SITE_IMAGES.hero}
-                  alt="Freshly cleaned living room carpet"
-                  className="w-full h-[420px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-              </div>
-              <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-2xl p-6 max-w-xs shadow-xl">
+              <div className="relative bg-card/95 border border-border rounded-2xl p-8 max-w-sm w-full shadow-2xl backdrop-blur-md">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent rounded-t-2xl" />
-                <h3 className="text-lg font-bold mb-4 text-foreground">Booking Summary</h3>
-                <div className="space-y-3 mb-4 text-sm">
-                  <div className="flex justify-between">
+                <h3 className="text-xl font-bold mb-6 text-foreground border-b border-border pb-4">Booking Summary</h3>
+                <div className="space-y-4 mb-6">
+                  <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Service</span>
                     <span className="font-semibold text-foreground">Carpet Deep Clean</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Property</span>
                     <span className="font-semibold text-foreground">3 Bed House</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Availability</span>
                     <span className="font-semibold text-accent">Today, 2:00 PM</span>
                   </div>
                 </div>
-                <div className="border-t border-border pt-3 flex justify-between items-center">
+                <div className="border-t border-border pt-4 flex justify-between items-center mb-6">
                   <span className="font-bold text-foreground">Total</span>
-                  <span className="font-bold text-xl text-foreground">£145</span>
+                  <span className="font-bold text-2xl text-foreground">£145</span>
                 </div>
+                <Link href="/book">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+                    Book Now
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           </div>
