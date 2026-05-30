@@ -13,6 +13,8 @@ import Services from "./pages/services";
 import BookingConfirmation from "./pages/booking-confirmation";
 import Contact from "./pages/contact";
 import About from "./pages/about";
+import Terms from "./pages/terms";
+import Privacy from "./pages/privacy";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,6 +36,8 @@ function Router() {
         <Route path="/booking-confirmation/:bookingNumber" component={BookingConfirmation} />
         <Route path="/contact" component={Contact} />
         <Route path="/about" component={About} />
+        <Route path="/terms" component={Terms} />
+        <Route path="/privacy" component={Privacy} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

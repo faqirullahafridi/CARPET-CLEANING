@@ -138,12 +138,15 @@ export default function Quote() {
                   {calculateQuote.data ? (
                     <>
                       <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-2">Total Estimate</div>
-                      <span className="text-5xl font-extrabold text-foreground mb-2">£{(calculateQuote.data.totalGbp / 100).toFixed(2)}</span>
+                      <span className="text-5xl font-extrabold text-foreground mb-2">£{calculateQuote.data.total.toFixed(2)}</span>
+                      {calculateQuote.data.minimumApplied && (
+                        <p className="text-xs text-muted-foreground mb-2">Minimum booking fee of £85 applied</p>
+                      )}
                       <div className="w-full mt-8 space-y-2 text-sm text-left">
                          {calculateQuote.data.lines.map((line, idx) => (
                            <div key={idx} className="flex justify-between text-muted-foreground">
-                             <span>{line.description}</span>
-                             <span className="font-bold text-foreground">£{(line.totalGbp / 100).toFixed(2)}</span>
+                             <span>{line.quantity}x {line.name}</span>
+                             <span className="font-bold text-foreground">£{line.lineTotal.toFixed(2)}</span>
                            </div>
                          ))}
                       </div>

@@ -37,6 +37,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+            <Link href="/" className="text-foreground/70 hover:text-foreground transition-colors">Home</Link>
             <Link href="/services" className="text-foreground/70 hover:text-foreground transition-colors">Services</Link>
             <Link href="/quote" className="text-foreground/70 hover:text-foreground transition-colors">Instant Quote</Link>
             <Link href="/about" className="text-foreground/70 hover:text-foreground transition-colors">About</Link>
@@ -116,8 +117,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>© {new Date().getFullYear()} FreshLux Cleaning Ltd. All rights reserved.</p>
             <div className="flex items-center gap-6">
-              <span className="hover:text-primary transition-colors cursor-pointer">Privacy Policy</span>
-              <span className="hover:text-primary transition-colors cursor-pointer">Terms of Service</span>
+              <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>

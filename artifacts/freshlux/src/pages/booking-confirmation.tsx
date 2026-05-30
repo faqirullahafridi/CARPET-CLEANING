@@ -84,7 +84,7 @@ export default function BookingConfirmation() {
               
               <div className="border-t border-border pt-4 mt-4 flex justify-between items-center">
                 <span className="font-bold text-foreground">Estimated Total</span>
-                <span className="font-extrabold text-2xl text-foreground">£{(booking.totalGbp / 100).toFixed(2)}</span>
+                <span className="font-extrabold text-2xl text-foreground">£{Number(booking.totalGbp).toFixed(2)}</span>
               </div>
             </div>
           </div>
