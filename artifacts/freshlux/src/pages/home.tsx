@@ -25,16 +25,17 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[92vh] flex items-center pt-24 pb-32 overflow-hidden">
+      <section className="relative min-h-[92vh] flex items-center pt-24 pb-32 overflow-hidden bg-[#081120]">
         <div className="absolute inset-0">
           <img
             src={SITE_IMAGES.hero}
             alt=""
             aria-hidden="true"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-center lg:object-[70%_center]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/92 to-background/55" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/40" />
+          {/* Dark scrim — image visible on the right, text readable on the left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#081120]/97 via-[#081120]/72 to-[#081120]/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#081120]/85 via-[#081120]/15 to-[#081120]/40" />
         </div>
 
         <div className="container max-w-7xl mx-auto px-6 relative z-10 w-full">
@@ -43,52 +44,53 @@ export default function Home() {
               variants={staggerContainer}
               initial="hidden"
               animate="show"
+              className="max-w-2xl"
             >
-              <motion.div variants={fadeUp} className="w-12 h-0.5 bg-accent mb-6" />
-              <motion.div variants={fadeUp} className="text-accent font-bold tracking-widest uppercase text-sm mb-4">
+              <motion.div variants={fadeUp} className="w-12 h-0.5 bg-[#22D3EE] mb-6" />
+              <motion.div variants={fadeUp} className="text-[#22D3EE] font-bold tracking-widest uppercase text-sm mb-4">
                 Trusted by 10,000+ UK Homes
               </motion.div>
               <motion.h1
                 variants={fadeUp}
-                className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-white leading-tight"
+                className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-white leading-tight drop-shadow-[0_4px_32px_rgba(0,0,0,0.45)]"
               >
                 Professional Carpet Cleaning Across the UK
               </motion.h1>
               <motion.p
                 variants={fadeUp}
-                className="text-lg md:text-xl text-white/80 mb-10 max-w-xl font-medium"
+                className="text-lg md:text-xl text-slate-200 mb-10 max-w-xl font-medium drop-shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
               >
                 Book trusted professional cleaners in minutes with instant pricing and same-day availability.
               </motion.p>
               <motion.div
                 variants={fadeUp}
-                className="flex flex-col sm:flex-row items-center gap-4 mb-12"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12"
               >
                 <Link href="/book" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-primary hover:bg-primary/90 text-white transition-all rounded-lg shadow-lg shadow-primary/25" data-testid="button-hero-book">
+                  <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-primary hover:bg-primary/90 text-white transition-all rounded-lg shadow-lg shadow-black/30" data-testid="button-hero-book">
                     Book Cleaning
                   </Button>
                 </Link>
                 <Link href="/services" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border border-white/30 bg-white/5 text-white hover:bg-white/10 hover:text-white rounded-lg backdrop-blur-sm" data-testid="button-hero-services">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border-2 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white rounded-lg backdrop-blur-sm" data-testid="button-hero-services">
                     View Services
                   </Button>
                 </Link>
               </motion.div>
 
-              <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-6 text-sm font-semibold text-white/90">
+              <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-semibold text-slate-100">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-accent" />
+                  <CheckCircle2 className="w-4 h-4 text-[#22D3EE]" />
                   <span>10,000+ Homes</span>
                 </div>
-                <div className="hidden sm:block w-px h-4 bg-white/20" />
+                <div className="hidden sm:block w-px h-4 bg-white/25" />
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-accent" />
+                  <Clock className="w-4 h-4 text-[#22D3EE]" />
                   <span>Same-Day</span>
                 </div>
-                <div className="hidden sm:block w-px h-4 bg-white/20" />
+                <div className="hidden sm:block w-px h-4 bg-white/25" />
                 <div className="flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-accent" />
+                  <Shield className="w-4 h-4 text-[#22D3EE]" />
                   <span>Fully Insured</span>
                 </div>
               </motion.div>
@@ -100,7 +102,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="hidden lg:flex justify-end"
             >
-              <div className="relative bg-card/95 border border-border rounded-2xl p-8 max-w-sm w-full shadow-2xl backdrop-blur-md">
+              <div className="relative bg-white border border-white/20 rounded-2xl p-8 max-w-sm w-full shadow-2xl shadow-black/40">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent rounded-t-2xl" />
                 <h3 className="text-xl font-bold mb-6 text-foreground border-b border-border pb-4">Booking Summary</h3>
                 <div className="space-y-4 mb-6">
