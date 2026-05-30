@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Loader2, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { getServiceImage } from "@/lib/site-images";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -47,12 +48,21 @@ export default function Services() {
                 viewport={{ once: true }}
               >
                 <Card className="bg-card border border-border rounded-xl overflow-hidden flex flex-col md:flex-row shadow-sm">
-                  <div className="md:w-1/3 bg-background border-r border-border p-8 flex flex-col justify-center">
-                    <h2 className="text-2xl font-extrabold text-foreground mb-2">{service.name}</h2>
-                    <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Starting from</div>
-                    <div className="text-4xl font-extrabold text-primary">£{service.startingFrom / 100}</div>
+                  <div className="md:w-2/5 relative min-h-[240px]">
+                    <img
+                      src={getServiceImage(service.id)}
+                      alt={service.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
                   </div>
-                  <div className="md:w-2/3 p-8 flex flex-col">
+                  <div className="md:w-3/5 p-8 flex flex-col">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+                      <h2 className="text-2xl font-extrabold text-foreground">{service.name}</h2>
+                      <div className="shrink-0">
+                        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Starting from</div>
+                        <div className="text-3xl font-extrabold text-primary">£{service.startingFrom / 100}</div>
+                      </div>
+                    </div>
                     <p className="text-muted-foreground text-lg mb-8">{service.description}</p>
                     
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Shield, Award, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { SITE_IMAGES } from "@/lib/site-images";
 
 export default function About() {
   return (
@@ -72,12 +73,17 @@ export default function About() {
             </ul>
           </div>
           <div className="relative">
-            <div className="aspect-square rounded-2xl bg-card border border-border flex items-center justify-center p-12 text-center shadow-sm">
-               <div>
-                 <Award className="w-16 h-16 text-primary mx-auto mb-6" />
-                 <h3 className="text-2xl font-extrabold text-foreground mb-2">Award Winning</h3>
-                 <p className="text-muted-foreground">Recognized for excellence in domestic and commercial cleaning services across the UK.</p>
-               </div>
+            <div className="aspect-square rounded-2xl overflow-hidden border border-border shadow-lg">
+              <img
+                src={SITE_IMAGES.hero}
+                alt="Professional carpet cleaning in a UK home"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 bg-card border border-border rounded-xl p-6 max-w-[220px] shadow-xl hidden sm:block">
+              <Award className="w-10 h-10 text-primary mb-3" />
+              <h3 className="text-lg font-extrabold text-foreground mb-1">Award Winning</h3>
+              <p className="text-sm text-muted-foreground">Excellence in domestic and commercial cleaning across the UK.</p>
             </div>
           </div>
         </div>

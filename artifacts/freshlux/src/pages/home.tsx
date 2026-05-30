@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2, Star, Clock, Shield, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { SITE_IMAGES } from "@/lib/site-images";
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -88,30 +89,35 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="hidden lg:block relative"
             >
-              <div className="bg-card border border-border rounded-2xl p-8 max-w-md ml-auto shadow-xl relative">
+              <div className="relative rounded-2xl overflow-hidden border border-border shadow-xl">
+                <img
+                  src={SITE_IMAGES.hero}
+                  alt="Freshly cleaned living room carpet"
+                  className="w-full h-[420px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+              </div>
+              <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-2xl p-6 max-w-xs shadow-xl">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent rounded-t-2xl" />
-                <h3 className="text-xl font-bold mb-6 text-foreground border-b border-border pb-4">Booking Summary</h3>
-                <div className="space-y-4 mb-6">
-                  <div className="flex justify-between text-sm">
+                <h3 className="text-lg font-bold mb-4 text-foreground">Booking Summary</h3>
+                <div className="space-y-3 mb-4 text-sm">
+                  <div className="flex justify-between">
                     <span className="text-muted-foreground">Service</span>
                     <span className="font-semibold text-foreground">Carpet Deep Clean</span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between">
                     <span className="text-muted-foreground">Property</span>
                     <span className="font-semibold text-foreground">3 Bed House</span>
                   </div>
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between">
                     <span className="text-muted-foreground">Availability</span>
                     <span className="font-semibold text-accent">Today, 2:00 PM</span>
                   </div>
                 </div>
-                <div className="border-t border-border pt-4 flex justify-between items-center mb-6">
+                <div className="border-t border-border pt-3 flex justify-between items-center">
                   <span className="font-bold text-foreground">Total</span>
-                  <span className="font-bold text-2xl text-foreground">£145</span>
+                  <span className="font-bold text-xl text-foreground">£145</span>
                 </div>
-                <Button className="w-full bg-muted/60 text-muted-foreground border border-border" disabled>
-                  Ready to Book
-                </Button>
               </div>
             </motion.div>
           </div>
@@ -153,12 +159,12 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "Carpet Cleaning", price: "£45", desc: "Deep extraction cleaning for all carpet types." },
-              { title: "Sofa & Upholstery", price: "£75", desc: "Restore the original beauty of your furniture." },
-              { title: "Rug Cleaning", price: "£25", desc: "Specialist care for delicate and everyday rugs." },
-              { title: "Mattress Cleaning", price: "£35", desc: "Remove dust mites, stains, and allergens." },
-              { title: "Deep Stain Removal", price: "£30", desc: "Targeted treatment for stubborn stains." },
-              { title: "End of Tenancy", price: "£95", desc: "Complete property carpet refresh for moving out." }
+              { title: "Carpet Cleaning", price: "£45", desc: "Deep extraction cleaning for all carpet types.", image: SITE_IMAGES.services.carpet },
+              { title: "Sofa & Upholstery", price: "£75", desc: "Restore the original beauty of your furniture.", image: SITE_IMAGES.services.sofa },
+              { title: "Rug Cleaning", price: "£25", desc: "Specialist care for delicate and everyday rugs.", image: SITE_IMAGES.services.rug },
+              { title: "Mattress Cleaning", price: "£35", desc: "Remove dust mites, stains, and allergens.", image: SITE_IMAGES.services.mattress },
+              { title: "Deep Stain Removal", price: "£30", desc: "Targeted treatment for stubborn stains.", image: SITE_IMAGES.services.deep },
+              { title: "End of Tenancy", price: "£95", desc: "Complete property carpet refresh for moving out.", image: SITE_IMAGES.services.eot }
             ].map((service, i) => (
               <motion.div
                 key={i}
@@ -168,12 +174,22 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="group cursor-pointer"
               >
-                <Card className="p-8 bg-card border-border border-t-2 border-t-primary rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md h-full flex flex-col">
+                <Card className="overflow-hidden bg-card border-border border-t-2 border-t-primary rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md h-full flex flex-col">
+                  <div className="relative h-44 overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
+                  </div>
+                  <div className="p-8 flex flex-col flex-1">
                   <h3 className="text-xl font-bold mb-3 text-foreground">{service.title}</h3>
                   <p className="text-muted-foreground mb-8 flex-1">{service.desc}</p>
                   <div className="flex items-center justify-between mt-auto">
                     <span className="text-sm font-medium text-muted-foreground">from <span className="text-lg font-bold text-foreground ml-1">{service.price}</span></span>
                     <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" />
+                  </div>
                   </div>
                 </Card>
               </motion.div>
@@ -215,6 +231,17 @@ export default function Home() {
       <section className="py-24 bg-background">
         <div className="container max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative rounded-2xl overflow-hidden border border-border shadow-lg">
+              <img
+                src={SITE_IMAGES.beforeAfter}
+                alt="Carpet cleaning before and after results"
+                className="w-full h-[360px] object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 to-transparent p-6">
+                <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-1">Real Results</p>
+                <p className="text-foreground font-bold">See the difference professional cleaning makes</p>
+              </div>
+            </div>
             <div>
               <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-6 leading-tight">
                 Why 10,000 homes trust Carpet Cleaning
