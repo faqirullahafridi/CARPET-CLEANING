@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useEffect } from "react";
+import { BrandMark } from "@/components/brand-mark";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -25,14 +26,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         style={{ scaleX }}
       />
       
-      <header className="sticky top-0 z-40 w-full bg-background/95 border-b border-border">
-        <div className="container max-w-7xl mx-auto px-6 h-40 flex items-center justify-between">
-          <Link href="/" className="flex items-center shrink-0">
-            <img
-              src="/CARPET.LOGO-removebg-preview.png"
-              alt="Carpet Cleaning"
-              className="h-36 w-auto max-w-[420px] object-contain"
-            />
+      <header className="sticky top-0 z-40 w-full bg-background/95 backdrop-blur-sm border-b border-border">
+        <div className="container max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
+          <Link href="/" className="shrink-0 transition-opacity hover:opacity-90">
+            <BrandMark />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
@@ -60,16 +57,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="container max-w-7xl mx-auto px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-8">
             <div className="col-span-1 md:col-span-2 lg:col-span-1">
-              <Link href="/" className="inline-flex mb-6">
-                <img
-                  src="/CARPET.LOGO-removebg-preview.png"
-                  alt="Carpet Cleaning"
-                  className="h-32 w-auto max-w-[380px] object-contain"
-                />
+              <Link href="/" className="inline-block mb-6 transition-opacity hover:opacity-90">
+                <BrandMark size="footer" />
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                The UK's premium carpet and upholstery cleaning service. 
-                Instant pricing, same-day availability, and a meticulous finish.
+                The UK&apos;s premium carpet and upholstery cleaning service.
+                Same-day availability and a meticulous finish.
               </p>
             </div>
 
