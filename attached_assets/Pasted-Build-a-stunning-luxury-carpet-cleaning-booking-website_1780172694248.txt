@@ -1,0 +1,347 @@
+Build a stunning luxury carpet cleaning booking website for the UK called:
+
+FreshLux Carpet Cleaning UK
+
+Tagline:
+“Deep Cleaning. Fresh Living.”
+
+IMPORTANT:
+This project is ONLY for the customer-facing website.
+DO NOT create:
+
+Admin panel
+Cleaner dashboard
+Staff dashboard
+Complex backend management systems
+
+Focus ONLY on:
+
+Premium frontend experience
+Online booking system
+Instant pricing
+Email confirmations
+Beautiful UI/UX
+High conversion design
+
+The website must feel:
+
+Luxurious
+Trustworthy
+Addictive to browse
+Modern startup style
+Highly animated
+Mobile-first
+Extremely polished
+
+The design inspiration should combine:
+
+Stripe
+Airbnb
+Apple
+Uber
+Modern SaaS startups
+
+Use:
+
+Next.js
+React
+Tailwind CSS
+Framer Motion
+
+Backend:
+
+Lightweight Node.js API
+Nodemailer only for booking emails
+
+NO ADMIN DASHBOARD.
+
+Colors:
+
+Dark Navy (#081120)
+Royal Blue (#2563EB)
+White (#FFFFFF)
+Cyan Glow Accents (#22D3EE)
+
+Design:
+
+Glassmorphism
+Floating cards
+Animated gradients
+Glow hover effects
+Soft shadows
+Smooth transitions
+Sticky CTA buttons
+Modern luxury typography
+Premium animations
+Interactive scrolling
+
+The website should feel like a million-dollar UK startup.
+
+Use REALISTIC UK carpet cleaning prices.
+
+Small Bedroom → £45
+Medium Bedroom → £55
+Large Bedroom → £65
+Living Room → £75
+Hallway → £35
+Landing → £30
+Stairs & Landing → £85
+Studio Flat → £95
+1 Bedroom Flat → £130
+2 Bedroom Flat → £180
+3 Bedroom House → £260
+4 Bedroom House → £350+
+Armchair → £40
+Dining Chair → £10
+2 Seater Sofa → £75
+3 Seater Sofa → £95
+Corner Sofa → £145
+U-Shape Sofa → £180
+Small Rug → £25
+Medium Rug → £40
+Large Rug → £60
+Persian Rug → £30/m²
+Wool Rug → £15/m²
+Silk Rug → £20/m²
+Single Mattress → £35
+Double Mattress → £50
+King Mattress → £65
+Stain Protection → +£15
+Pet Odor Removal → +£20
+Deep Sanitization → +£25
+Scotchgard Protection → +£20
+Heavy Stain Removal → +£30
+Same-Day Emergency Booking → +£25
+
+IMPORTANT:
+
+Dynamic pricing must automatically calculate.
+Minimum booking fee = £85
+Bundle discounts enabled
+“You Saved £XX” section included
+
+Create an extremely beautiful animated homepage.
+
+Fullscreen hero section with:
+
+Animated gradient background
+Floating particles
+Luxury carpet cleaning visuals
+Motion effects
+Glow animations
+
+Headline:
+“Professional Carpet Cleaning Across the UK”
+
+Subheadline:
+“Book trusted professional cleaners in minutes with instant pricing and same-day availability.”
+
+Buttons:
+
+Book Cleaning
+Get Instant Quote
+
+Include:
+
+Animated trust badges
+“10,000+ Homes Cleaned”
+“Same-Day Availability”
+“Fully Insured & Certified”
+Review stars
+
+Add:
+
+Before/after slider
+Animated pricing cards
+Customer testimonials
+Statistics counters
+FAQ accordion
+Service process timeline
+Interactive room selector
+Live quote calculator
+Floating CTA sections
+
+Create beautiful animated service cards for:
+
+Carpet Cleaning
+Sofa Cleaning
+Rug Cleaning
+Mattress Cleaning
+Deep Cleaning
+End of Tenancy Cleaning
+
+Each card includes:
+
+Large image
+Features
+Benefits
+Estimated pricing
+CTA button
+Hover animations
+
+MOST IMPORTANT FEATURE.
+
+Build a luxury multi-step booking flow.
+
+Choose service:
+
+Carpet Cleaning
+Sofa Cleaning
+Rug Cleaning
+Mattress Cleaning
+Deep Cleaning
+
+Enter UK postcode
+
+Select property type:
+
+Flat
+House
+Office
+
+Select rooms/items
+
+Dynamic live price calculation
+
+Choose date & time
+
+Customer details:
+
+Full Name
+Email
+Phone Number
+Address
+Postcode
+Notes
+
+Booking confirmation screen
+
+Features:
+
+Animated progress bar
+Smooth transitions
+Booking summary sidebar
+Real-time pricing
+Coupon support
+Floating total price
+Mobile optimized
+“You Saved £XX” section
+
+Use Nodemailer.
+
+After booking:
+
+Customer receives premium booking confirmation email
+Business owner receives booking email notification
+
+Customer email includes:
+
+Booking number
+Service details
+Address
+Booking time/date
+Pricing breakdown
+Contact details
+
+Email design:
+
+Modern
+Premium
+Responsive
+Branded
+
+Add:
+
+Google-style reviews
+Verified customer badges
+Before/after galleries
+“Trusted By 10,000+ Homes”
+Satisfaction guarantee
+Animated testimonials
+Trustpilot-style sections
+
+Implement:
+
+SEO-friendly URLs
+Dynamic metadata
+Open Graph tags
+Sitemap
+Robots.txt
+Structured schema
+Fast page loading
+Lazy loading
+Optimized images
+Mobile-first optimization
+
+Target keywords:
+
+Carpet cleaning UK
+Professional carpet cleaners
+Sofa cleaning UK
+Deep carpet cleaning
+Same-day carpet cleaning
+
+Include:
+
+Contact form
+UK service area map
+Phone number
+Email support
+Business hours
+Live chat button
+
+Add:
+
+Smooth page transitions
+Floating animations
+Glow hover effects
+Sticky booking button
+Scroll progress bar
+Skeleton loaders
+Animated counters
+Glassmorphism cards
+Premium loaders
+Animated success screen
+Floating CTA buttons
+
+Add:
+
+AI quote assistant
+Instant quote generator
+Loyalty discounts
+Referral discounts
+Push notifications
+PDF booking invoice
+Repeat booking option
+Live availability indicator
+
+Implement:
+
+Form validation
+Spam protection
+Rate limiting
+Secure APIs
+Environment variables
+
+Generate:
+
+Complete frontend
+Lightweight backend for bookings & emails
+Booking system
+Responsive mobile UI
+Production-ready architecture
+Clean reusable components
+README.md
+.env.example
+Deployment instructions
+Professional folder structure
+
+The final website must:
+
+Feel luxurious
+Convert visitors into customers
+Build instant trust
+Look like a premium UK startup
+Be highly animated
+Work flawlessly on mobile
+Feel addictive to browse

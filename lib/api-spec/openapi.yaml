@@ -3,20 +3,31 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: FreshLux Carpet Cleaning UK API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: services
+    description: Cleaning services
+  - name: bookings
+    description: Booking operations
+  - name: quote
+    description: Quote calculation
+  - name: coupons
+    description: Coupon validation
+  - name: contact
+    description: Contact form
+  - name: availability
+    description: Time slot availability
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,13 +35,418 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /services:
+    get:
+      operationId: listServices
+      tags: [services]
+      summary: List all available cleaning services
+      responses:
+        "200":
+          description: List of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Service"
+
+  /services/{serviceId}/items:
+    get:
+      operationId: listServiceItems
+      tags: [services]
+      summary: List priceable items for a service
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of service items with pricing
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ServiceItem"
+
+  /quote:
+    post:
+      operationId: calculateQuote
+      tags: [quote]
+      summary: Calculate a real-time quote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuoteInput"
+      responses:
+        "200":
+          description: Calculated quote result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuoteResult"
+
+  /coupons/validate:
+    post:
+      operationId: validateCoupon
+      tags: [coupons]
+      summary: Validate a coupon code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CouponValidateInput"
+      responses:
+        "200":
+          description: Valid coupon
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CouponResult"
+        "404":
+          description: Coupon not found or expired
+
+  /bookings:
+    post:
+      operationId: createBooking
+      tags: [bookings]
+      summary: Create a new booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingInput"
+      responses:
+        "201":
+          description: Booking created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        "400":
+          description: Invalid booking data
+
+  /bookings/{bookingNumber}:
+    get:
+      operationId: getBooking
+      tags: [bookings]
+      summary: Get a booking by booking number
+      parameters:
+        - name: bookingNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Booking details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        "404":
+          description: Booking not found
+
+  /availability:
+    get:
+      operationId: getAvailability
+      tags: [availability]
+      summary: Get available time slots for a given date range
+      parameters:
+        - name: from
+          in: query
+          required: true
+          schema:
+            type: string
+            description: ISO date string (YYYY-MM-DD)
+        - name: to
+          in: query
+          required: true
+          schema:
+            type: string
+            description: ISO date string (YYYY-MM-DD)
+      responses:
+        "200":
+          description: Available slots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AvailableSlot"
+
+  /contact:
+    post:
+      operationId: submitContact
+      tags: [contact]
+      summary: Submit a contact form enquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInput"
+      responses:
+        "200":
+          description: Message received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactResult"
+
 components:
   schemas:
     HealthStatus:
       type: object
+      required: [status]
       properties:
         status:
           type: string
-      required:
-        - status
 
+    Service:
+      type: object
+      required: [id, name, slug, description, startingFrom, icon]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        startingFrom:
+          type: number
+          description: Starting price in GBP pence (divide by 100 for pounds)
+        icon:
+          type: string
+        features:
+          type: array
+          items:
+            type: string
+
+    ServiceItem:
+      type: object
+      required: [id, name, category, priceGbp, unit]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        priceGbp:
+          type: number
+          description: Price in GBP (e.g. 45.00)
+        unit:
+          type: string
+          description: e.g. "per item", "per m²"
+        description:
+          type: ["string", "null"]
+
+    QuoteInput:
+      type: object
+      required: [serviceId, items]
+      properties:
+        serviceId:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuoteLineItem"
+        addons:
+          type: array
+          items:
+            type: string
+        couponCode:
+          type: ["string", "null"]
+
+    QuoteLineItem:
+      type: object
+      required: [itemId, quantity]
+      properties:
+        itemId:
+          type: string
+        quantity:
+          type: number
+
+    QuoteResult:
+      type: object
+      required: [subtotal, discount, total, minimumApplied, lines]
+      properties:
+        subtotal:
+          type: number
+        discount:
+          type: number
+        total:
+          type: number
+        minimumApplied:
+          type: boolean
+        savedAmount:
+          type: number
+        lines:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuoteLine"
+
+    QuoteLine:
+      type: object
+      required: [name, quantity, unitPrice, lineTotal]
+      properties:
+        name:
+          type: string
+        quantity:
+          type: number
+        unitPrice:
+          type: number
+        lineTotal:
+          type: number
+
+    CouponValidateInput:
+      type: object
+      required: [code]
+      properties:
+        code:
+          type: string
+
+    CouponResult:
+      type: object
+      required: [code, discountType, discountValue, description]
+      properties:
+        code:
+          type: string
+        discountType:
+          type: string
+          enum: [percentage, fixed]
+        discountValue:
+          type: number
+        description:
+          type: string
+
+    BookingInput:
+      type: object
+      required: [serviceId, items, date, timeSlot, customerName, customerEmail, customerPhone, address, postcode]
+      properties:
+        serviceId:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuoteLineItem"
+        addons:
+          type: array
+          items:
+            type: string
+        date:
+          type: string
+          description: ISO date string YYYY-MM-DD
+        timeSlot:
+          type: string
+          description: e.g. "09:00-11:00"
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        customerPhone:
+          type: string
+        address:
+          type: string
+        postcode:
+          type: string
+        notes:
+          type: ["string", "null"]
+        couponCode:
+          type: ["string", "null"]
+        propertyType:
+          type: string
+          enum: [flat, house, office]
+
+    Booking:
+      type: object
+      required: [id, bookingNumber, serviceId, serviceName, date, timeSlot, customerName, customerEmail, customerPhone, address, postcode, status, totalGbp, createdAt]
+      properties:
+        id:
+          type: integer
+        bookingNumber:
+          type: string
+        serviceId:
+          type: string
+        serviceName:
+          type: string
+        date:
+          type: string
+        timeSlot:
+          type: string
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        customerPhone:
+          type: string
+        address:
+          type: string
+        postcode:
+          type: string
+        notes:
+          type: ["string", "null"]
+        status:
+          type: string
+          enum: [pending, confirmed, in_progress, completed, cancelled]
+        totalGbp:
+          type: number
+        subtotalGbp:
+          type: number
+        discountGbp:
+          type: number
+        couponCode:
+          type: ["string", "null"]
+        propertyType:
+          type: ["string", "null"]
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuoteLine"
+        createdAt:
+          type: string
+
+    AvailableSlot:
+      type: object
+      required: [date, slots]
+      properties:
+        date:
+          type: string
+        slots:
+          type: array
+          items:
+            type: string
+
+    ContactInput:
+      type: object
+      required: [name, email, message]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: ["string", "null"]
+        message:
+          type: string
+        subject:
+          type: ["string", "null"]
+
+    ContactResult:
+      type: object
+      required: [success, message]
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
