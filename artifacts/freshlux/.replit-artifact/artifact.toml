@@ -1,6 +1,6 @@
 kind = "web"
 previewPath = "/"
-title = "FreshLux Carpet Cleaning UK"
+title = "Carpet Cleaning UK"
 version = "1.0.0"
 id = "artifacts/freshlux"
 router = "path"

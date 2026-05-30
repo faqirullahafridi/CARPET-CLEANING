@@ -5,26 +5,13 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 const rawPort = process.env.PORT;
-
-if (!rawPort) {
-  throw new Error(
-    "PORT environment variable is required but was not provided.",
-  );
-}
-
-const port = Number(rawPort);
+const port = rawPort ? Number(rawPort) : 4173;
 
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-const basePath = process.env.BASE_PATH;
-
-if (!basePath) {
-  throw new Error(
-    "BASE_PATH environment variable is required but was not provided.",
-  );
-}
+const basePath = process.env.BASE_PATH ?? "/";
 
 export default defineConfig({
   base: basePath,
@@ -66,6 +53,26 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    ...(process.env.REPL_ID === undefined
+      ? {
+          proxy: {
+            "/api": {
+              target: "http://127.0.0.1:8080",
+              changeOrigin: true,
+            },
+            "/overpass": {
+              target: "https://overpass-api.de",
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/overpass/, "/api/interpreter"),
+            },
+            "/nominatim": {
+              target: "https://nominatim.openstreetmap.org",
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/nominatim/, ""),
+            },
+          },
+        }
+      : {}),
   },
   preview: {
     port,

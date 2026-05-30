@@ -26,20 +26,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
       />
       
       <header className="sticky top-0 z-40 w-full bg-background/95 border-b border-border">
-        <div className="container max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded bg-primary flex items-center justify-center">
-              <div className="w-4 h-4 bg-white" />
-            </div>
-            <span className="text-xl font-extrabold tracking-tight text-foreground">
-              FreshLux
-            </span>
+        <div className="container max-w-7xl mx-auto px-6 h-40 flex items-center justify-between">
+          <Link href="/" className="flex items-center shrink-0">
+            <img
+              src="/CARPET.LOGO-removebg-preview.png"
+              alt="Carpet Cleaning"
+              className="h-36 w-auto max-w-[420px] object-contain"
+            />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             <Link href="/" className="text-foreground/70 hover:text-foreground transition-colors">Home</Link>
             <Link href="/services" className="text-foreground/70 hover:text-foreground transition-colors">Services</Link>
-            <Link href="/quote" className="text-foreground/70 hover:text-foreground transition-colors">Instant Quote</Link>
             <Link href="/about" className="text-foreground/70 hover:text-foreground transition-colors">About</Link>
             <Link href="/contact" className="text-foreground/70 hover:text-foreground transition-colors">Contact</Link>
           </nav>
@@ -62,11 +60,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="container max-w-7xl mx-auto px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-8">
             <div className="col-span-1 md:col-span-2 lg:col-span-1">
-              <Link href="/" className="flex items-center gap-3 mb-6">
-                <div className="w-6 h-6 rounded bg-primary flex items-center justify-center">
-                  <div className="w-3 h-3 bg-white" />
-                </div>
-                <span className="text-xl font-extrabold tracking-tight text-foreground">FreshLux</span>
+              <Link href="/" className="inline-flex mb-6">
+                <img
+                  src="/CARPET.LOGO-removebg-preview.png"
+                  alt="Carpet Cleaning"
+                  className="h-32 w-auto max-w-[380px] object-contain"
+                />
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                 The UK's premium carpet and upholstery cleaning service. 
@@ -89,7 +88,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <h3 className="font-semibold text-foreground mb-6">Company</h3>
               <ul className="space-y-4 text-sm text-muted-foreground">
                 <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
-                <li><Link href="/quote" className="hover:text-primary transition-colors">Pricing</Link></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
                 <li><Link href="/book" className="hover:text-primary transition-colors">Book Now</Link></li>
               </ul>
@@ -104,7 +102,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </li>
                 <li className="flex items-start gap-3">
                   <Mail className="w-4 h-4 mt-0.5 text-accent" />
-                  <span>hello@freshlux.co.uk</span>
+                  <span>hello@carpetcleaning.co.uk</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 mt-0.5 text-accent" />
@@ -115,7 +113,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>© {new Date().getFullYear()} FreshLux Cleaning Ltd. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Carpet Cleaning Ltd. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>

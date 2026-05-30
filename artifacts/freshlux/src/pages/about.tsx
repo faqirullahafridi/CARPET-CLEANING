@@ -42,17 +42,17 @@ export default function About() {
             Redefining Clean.
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-medium">
-            FreshLux was founded with a single mission: to bring a modern, transparent, and premium experience to the traditional carpet cleaning industry.
+            Carpet Cleaning was founded with a single mission: to bring a modern, transparent, and premium experience to the traditional carpet cleaning industry.
           </p>
         </div>
 
         {/* Story Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-24">
           <div className="space-y-6">
-            <h2 className="text-3xl font-extrabold text-foreground">The FreshLux Standard</h2>
+            <h2 className="text-3xl font-extrabold text-foreground">The Carpet Cleaning Standard</h2>
             <div className="w-12 h-1 bg-accent" />
             <p className="text-muted-foreground text-lg leading-relaxed">
-              For too long, booking a cleaner meant dealing with vague quotes, cash-only payments, and unpredictable quality. We built FreshLux to fix that.
+              For too long, booking a cleaner meant dealing with vague quotes, cash-only payments, and unpredictable quality. We built Carpet Cleaning to fix that.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed">
               Every technician is vetted, fully insured, and equipped with industry-leading machinery. Our transparent pricing means the quote you see is the price you pay—no hidden fees.

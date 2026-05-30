@@ -6,6 +6,7 @@ import couponsRouter from "./coupons";
 import bookingsRouter from "./bookings";
 import availabilityRouter from "./availability";
 import contactRouter from "./contact";
+import addressesRouter from "./addresses";
 
 const router: IRouter = Router();
 
@@ -16,5 +17,6 @@ router.use(couponsRouter);
 router.use(bookingsRouter);
 router.use(availabilityRouter);
 router.use(contactRouter);
+router.use(addressesRouter);
 
 export default router;

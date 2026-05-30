@@ -7,6 +7,9 @@ import { Label } from "@/components/ui/label";
 import { useListServices, useListServiceItems, useCreateBooking } from "@workspace/api-client-react";
 import { ChevronRight, ChevronLeft, Loader2, Check, Info } from "lucide-react";
 import { useLocation } from "wouter";
+import { PostcodeInput } from "@/components/postcode-input";
+import { AddressPicker } from "@/components/address-picker";
+import type { PostcodeLookupResult } from "@/lib/postcodes";
 
 export default function Book() {
   const [step, setStep] = useState(1);
@@ -16,6 +19,7 @@ export default function Book() {
   const [serviceId, setServiceId] = useState<string>("");
   const [propertyType, setPropertyType] = useState<"flat" | "house" | "office">("flat");
   const [postcode, setPostcode] = useState("");
+  const [postcodeDetails, setPostcodeDetails] = useState<PostcodeLookupResult | null>(null);
   const [items, setItems] = useState<{itemId: string, quantity: number}[]>([]);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [timeSlot, setTimeSlot] = useState("");
@@ -38,7 +42,7 @@ export default function Book() {
   const prevStep = () => setStep(s => Math.max(s - 1, 1));
 
   const handleBooking = () => {
-    if (!serviceId || !date || !timeSlot || !customer.name || !customer.email || !customer.phone || !customer.address || !postcode) {
+    if (!serviceId || !date || !timeSlot || !customer.name || !customer.email || !customer.phone || !customer.address || !postcodeDetails) {
         return; // Validation would go here
     }
 
@@ -52,7 +56,7 @@ export default function Book() {
         customerEmail: customer.email,
         customerPhone: customer.phone,
         address: customer.address,
-        postcode,
+        postcode: postcodeDetails?.postcode ?? postcode,
         notes: customer.notes,
         propertyType
       }
@@ -140,17 +144,35 @@ export default function Book() {
                       </div>
                       <div>
                         <Label className="text-sm font-semibold text-foreground mb-3 block">Postcode</Label>
-                        <Input 
-                          placeholder="e.g. SW1A 1AA" 
-                          value={postcode} 
-                          onChange={e => setPostcode(e.target.value)}
-                          className="bg-background border-border text-base h-12 text-foreground"
+                        <PostcodeInput
+                          value={postcode}
+                          onChange={(value) => {
+                            setPostcode(value);
+                            if (postcodeDetails && value !== postcodeDetails.postcode) {
+                              setPostcodeDetails(null);
+                              setCustomer((prev) => ({ ...prev, address: "" }));
+                            }
+                          }}
+                          onValidated={(result) => {
+                            setPostcodeDetails(result);
+                            setCustomer((prev) => ({ ...prev, address: "" }));
+                          }}
                         />
                       </div>
+
+                      {postcodeDetails && (
+                        <AddressPicker
+                          postcodeDetails={postcodeDetails}
+                          value={customer.address}
+                          onChange={(address) =>
+                            setCustomer((prev) => ({ ...prev, address }))
+                          }
+                        />
+                      )}
                     </div>
 
                     <div className="mt-10 flex justify-end">
-                      <Button onClick={nextStep} disabled={!serviceId || !postcode} className="bg-primary hover:bg-primary/90 text-white h-12 px-8 rounded-lg">
+                      <Button onClick={nextStep} disabled={!serviceId || !postcodeDetails || !customer.address.trim()} className="bg-primary hover:bg-primary/90 text-white h-12 px-8 rounded-lg">
                         Continue <ChevronRight className="w-4 h-4 ml-2" />
                       </Button>
                     </div>
@@ -329,8 +351,13 @@ export default function Book() {
                           value={customer.address}
                           onChange={(e) => setCustomer({...customer, address: e.target.value})}
                           className="bg-background border-border h-11 text-foreground" 
-                          placeholder="123 High Street, London"
+                          placeholder="Address from postcode lookup, or edit here"
                         />
+                        {postcodeDetails && (
+                          <p className="mt-2 text-xs text-muted-foreground">
+                            Postcode {postcodeDetails.postcode} — update here if needed
+                          </p>
+                        )}
                       </div>
                       <div>
                         <Label className="text-sm font-medium text-foreground mb-2 block">Special Instructions (Optional)</Label>
@@ -379,10 +406,29 @@ export default function Book() {
                       <span className="font-bold text-foreground capitalize">{propertyType}</span>
                     </div>
                   )}
-                  {postcode && (
+                  {customer.address && (
+                    <div className="flex justify-between items-start gap-4">
+                      <span className="text-muted-foreground shrink-0">Address</span>
+                      <span className="font-bold text-foreground text-right text-sm leading-relaxed">
+                        {customer.address}
+                      </span>
+                    </div>
+                  )}
+                  {postcodeDetails && (
                     <div className="flex justify-between items-start">
                       <span className="text-muted-foreground">Postcode</span>
-                      <span className="font-bold text-foreground uppercase">{postcode}</span>
+                      <span className="font-bold text-foreground text-right uppercase">
+                        {postcodeDetails.postcode}
+                        {postcodeDetails.adminDistrict && (
+                          <>
+                            <br />
+                            <span className="text-xs font-normal normal-case text-muted-foreground">
+                              {postcodeDetails.adminDistrict}
+                              {postcodeDetails.region ? `, ${postcodeDetails.region}` : ""}
+                            </span>
+                          </>
+                        )}
+                      </span>
                     </div>
                   )}
                   {date && timeSlot && (

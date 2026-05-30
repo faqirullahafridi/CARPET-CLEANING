@@ -58,14 +58,14 @@ function buildCustomerEmailHtml(data: BookingEmailData): string {
 <body style="margin:0;padding:0;background:#081120;font-family:'Helvetica Neue',Arial,sans-serif;">
   <div style="max-width:600px;margin:0 auto;padding:40px 20px;">
     <div style="text-align:center;margin-bottom:32px;">
-      <div style="font-size:28px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">FreshLux</div>
+      <div style="font-size:28px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">Carpet Cleaning</div>
       <div style="font-size:13px;color:#64748b;margin-top:4px;">Deep Cleaning. Fresh Living.</div>
     </div>
     <div style="background:linear-gradient(135deg,#0f2040 0%,#0d1b35 100%);border:1px solid #1e3a5f;border-radius:16px;padding:32px;margin-bottom:24px;">
       <div style="text-align:center;margin-bottom:24px;">
         <div style="display:inline-block;background:linear-gradient(135deg,#2563eb,#22d3ee);border-radius:50%;width:64px;height:64px;line-height:64px;font-size:32px;margin-bottom:16px;">✓</div>
         <h1 style="color:#ffffff;font-size:24px;font-weight:700;margin:0 0 8px;">Booking Confirmed!</h1>
-        <p style="color:#94a3b8;font-size:14px;margin:0;">Thank you for choosing FreshLux, ${data.customerName}</p>
+        <p style="color:#94a3b8;font-size:14px;margin:0;">Thank you for choosing Carpet Cleaning, ${data.customerName}</p>
       </div>
       <div style="background:#081120;border-radius:10px;padding:16px;margin-bottom:20px;text-align:center;">
         <div style="font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">Booking Reference</div>
@@ -114,10 +114,10 @@ function buildCustomerEmailHtml(data: BookingEmailData): string {
     </div>` : ""}
     <div style="text-align:center;padding:24px 0;border-top:1px solid #1e3a5f;">
       <p style="color:#64748b;font-size:13px;margin:0 0 8px;">Questions? Contact us anytime</p>
-      <p style="color:#22d3ee;font-size:13px;margin:0;font-weight:600;">hello@freshluxcleaning.co.uk · 0800 123 4567</p>
+      <p style="color:#22d3ee;font-size:13px;margin:0;font-weight:600;">hello@carpetcleaning.co.uk · 0800 123 4567</p>
     </div>
     <div style="text-align:center;padding-top:16px;">
-      <p style="color:#475569;font-size:12px;margin:0;">FreshLux Carpet Cleaning UK · Fully Insured & Certified</p>
+      <p style="color:#475569;font-size:12px;margin:0;">Carpet Cleaning UK · Fully Insured & Certified</p>
     </div>
   </div>
 </body>
@@ -126,7 +126,7 @@ function buildCustomerEmailHtml(data: BookingEmailData): string {
 
 export async function sendBookingConfirmationToCustomer(data: BookingEmailData) {
   const transporter = createTransporter();
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@freshluxcleaning.co.uk";
+  const adminEmail = process.env.ADMIN_EMAIL || "admin@carpetcleaning.co.uk";
 
   if (!transporter) {
     logger.info({ bookingNumber: data.bookingNumber, to: data.customerEmail }, "Email: customer booking confirmation (not sent — SMTP not configured)");
@@ -134,9 +134,9 @@ export async function sendBookingConfirmationToCustomer(data: BookingEmailData) 
   }
 
   await transporter.sendMail({
-    from: `"FreshLux Carpet Cleaning" <${process.env.SMTP_USER}>`,
+    from: `"Carpet Cleaning" <${process.env.SMTP_USER}>`,
     to: data.customerEmail,
-    subject: `Booking Confirmed — ${data.bookingNumber} | FreshLux Carpet Cleaning`,
+    subject: `Booking Confirmed — ${data.bookingNumber} | Carpet Cleaning UK`,
     html: buildCustomerEmailHtml(data),
   });
 
@@ -145,7 +145,7 @@ export async function sendBookingConfirmationToCustomer(data: BookingEmailData) 
 
 export async function sendBookingNotificationToAdmin(data: BookingEmailData) {
   const transporter = createTransporter();
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@freshluxcleaning.co.uk";
+  const adminEmail = process.env.ADMIN_EMAIL || "admin@carpetcleaning.co.uk";
 
   if (!transporter) {
     logger.info({ bookingNumber: data.bookingNumber }, "Email: admin booking notification (not sent — SMTP not configured)");
@@ -153,7 +153,7 @@ export async function sendBookingNotificationToAdmin(data: BookingEmailData) {
   }
 
   await transporter.sendMail({
-    from: `"FreshLux Bookings" <${process.env.SMTP_USER}>`,
+    from: `"Carpet Cleaning Bookings" <${process.env.SMTP_USER}>`,
     to: adminEmail,
     subject: `New Booking: ${data.bookingNumber} — ${data.customerName}`,
     html: `<h2>New Booking Received</h2>
@@ -177,7 +177,7 @@ export async function sendContactNotification(data: {
   message: string;
 }) {
   const transporter = createTransporter();
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@freshluxcleaning.co.uk";
+  const adminEmail = process.env.ADMIN_EMAIL || "admin@carpetcleaning.co.uk";
 
   if (!transporter) {
     logger.info({ from: data.email }, "Email: contact form submission (not sent — SMTP not configured)");
@@ -185,7 +185,7 @@ export async function sendContactNotification(data: {
   }
 
   await transporter.sendMail({
-    from: `"FreshLux Contact Form" <${process.env.SMTP_USER}>`,
+    from: `"Carpet Cleaning Contact Form" <${process.env.SMTP_USER}>`,
     to: adminEmail,
     replyTo: data.email,
     subject: `Contact Enquiry${data.subject ? `: ${data.subject}` : ""} — ${data.name}`,

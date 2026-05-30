@@ -82,7 +82,7 @@ export default function Contact() {
               <div>
                 <h3 className="font-bold text-lg text-foreground mb-1">Email Us</h3>
                 <p className="text-muted-foreground text-sm mb-2">We reply within 2 hours</p>
-                <a href="mailto:hello@freshlux.co.uk" className="text-lg font-bold text-primary hover:text-foreground transition-colors">hello@freshlux.co.uk</a>
+                <a href="mailto:hello@carpetcleaning.co.uk" className="text-lg font-bold text-primary hover:text-foreground transition-colors">hello@carpetcleaning.co.uk</a>
               </div>
             </div>
 

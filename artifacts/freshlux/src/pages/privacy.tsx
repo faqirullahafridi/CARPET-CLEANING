@@ -13,7 +13,7 @@ export default function Privacy() {
           <section>
             <h2 className="text-2xl font-bold text-foreground mb-4">1. Who We Are</h2>
             <p className="text-muted-foreground leading-relaxed">
-              FreshLux Cleaning Ltd ("FreshLux", "we", "us") is the data controller responsible for the personal
+              Carpet Cleaning Ltd ("Carpet Cleaning", "we", "us") is the data controller responsible for the personal
               information we collect through our website and services. We are committed to protecting your privacy
               and handling your data in an open and transparent manner in accordance with the UK General Data
               Protection Regulation (UK GDPR) and the Data Protection Act 2018.
@@ -95,7 +95,7 @@ export default function Privacy() {
               <li><span className="font-semibold text-foreground">Right to withdraw consent:</span> Withdraw consent for marketing at any time.</li>
             </ul>
             <p className="text-muted-foreground leading-relaxed mt-4">
-              To exercise any of these rights, contact us at hello@freshlux.co.uk. We will respond within 30 days.
+              To exercise any of these rights, contact us at hello@carpetcleaning.co.uk. We will respond within 30 days.
               You also have the right to lodge a complaint with the Information Commissioner's Office (ICO) at ico.org.uk.
             </p>
           </section>
@@ -134,8 +134,8 @@ export default function Privacy() {
               For any questions, data subject requests, or concerns about your privacy:
             </p>
             <div className="mt-4 p-5 bg-card border border-border rounded-xl text-muted-foreground">
-              <p className="font-semibold text-foreground">FreshLux Cleaning Ltd — Data Controller</p>
-              <p>Email: hello@freshlux.co.uk</p>
+              <p className="font-semibold text-foreground">Carpet Cleaning Ltd — Data Controller</p>
+              <p>Email: hello@carpetcleaning.co.uk</p>
               <p>Phone: 0800 123 4567</p>
               <p>London, United Kingdom</p>
             </div>

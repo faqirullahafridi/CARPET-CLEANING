@@ -8,7 +8,6 @@ import NotFound from "@/pages/not-found";
 // Import pages (we will create these)
 import Home from "./pages/home";
 import Book from "./pages/book";
-import Quote from "./pages/quote";
 import Services from "./pages/services";
 import BookingConfirmation from "./pages/booking-confirmation";
 import Contact from "./pages/contact";
@@ -31,7 +30,6 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/book" component={Book} />
-        <Route path="/quote" component={Quote} />
         <Route path="/services" component={Services} />
         <Route path="/booking-confirmation/:bookingNumber" component={BookingConfirmation} />
         <Route path="/contact" component={Contact} />

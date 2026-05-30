@@ -1,4 +1,4 @@
-# FreshLux Carpet Cleaning UK
+# Carpet Cleaning UK
 
 A luxury UK carpet cleaning booking platform — "Deep Cleaning. Fresh Living." Full-stack customer-facing website with animated homepage, multi-step booking flow, real-time pricing, and email confirmations.
 

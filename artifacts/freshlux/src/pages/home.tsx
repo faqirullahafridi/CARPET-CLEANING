@@ -57,9 +57,9 @@ export default function Home() {
                     Book Cleaning
                   </Button>
                 </Link>
-                <Link href="/quote" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border border-border hover:bg-muted text-foreground rounded-lg" data-testid="button-hero-quote">
-                    Get Instant Quote
+                <Link href="/services" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border border-border hover:bg-muted text-foreground rounded-lg" data-testid="button-hero-services">
+                    View Services
                   </Button>
                 </Link>
               </motion.div>
@@ -195,7 +195,7 @@ export default function Home() {
             <div className="hidden md:block absolute top-12 left-1/6 right-1/6 h-px bg-border" />
             
             {[
-              { step: "01", title: "Get a Quote", desc: "Select your rooms and items for an instant online price." },
+              { step: "01", title: "Book Online", desc: "Choose your service, property details, and see pricing as you go." },
               { step: "02", title: "Choose a Date", desc: "Pick a convenient time slot, including same-day availability." },
               { step: "03", title: "We Clean", desc: "Our professionals arrive and transform your carpets." }
             ].map((item, i) => (
@@ -217,7 +217,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-6 leading-tight">
-                Why 10,000 homes trust FreshLux
+                Why 10,000 homes trust Carpet Cleaning
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
                 We deliver uncompromising quality with transparent pricing and professional service.
