@@ -6,10 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Clock, Loader2 } from "lucide-react";
+import { MapPin, Phone, Mail, Loader2 } from "lucide-react";
 import { useSubmitContact } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
-import { motion } from "framer-motion";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -50,55 +49,60 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Get in Touch</h1>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">Have a question? We're here to help seven days a week.</p>
+    <div className="min-h-screen bg-background pt-24 pb-12">
+      <div className="container max-w-7xl mx-auto px-6">
+        <div className="text-center mb-20">
+          <div className="text-accent text-sm font-bold tracking-widest uppercase mb-4">
+            Customer Support
+          </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-white">Get in Touch</h1>
+          <p className="text-xl text-white/70 max-w-2xl mx-auto font-medium">Have a question? We're here to help seven days a week.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Contact Info */}
-          <div className="space-y-6">
-            <Card className="p-6 bg-card/50 backdrop-blur-md border-white/10 flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
-                <Phone className="w-6 h-6" />
+          <div className="space-y-8 lg:col-span-1">
+            <h2 className="text-2xl font-extrabold text-white mb-6">Contact Details</h2>
+            
+            <div className="flex items-start gap-5">
+              <div className="w-12 h-12 rounded bg-card border border-white/10 flex items-center justify-center text-primary shrink-0">
+                <Phone className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-1">Call Us</h3>
+                <h3 className="font-bold text-lg text-white mb-1">Call Us</h3>
                 <p className="text-white/60 text-sm mb-2">Mon-Sun, 8am to 8pm</p>
-                <a href="tel:08001234567" className="text-xl font-medium hover:text-accent transition-colors">0800 123 4567</a>
+                <a href="tel:08001234567" className="text-lg font-bold text-primary hover:text-white transition-colors">0800 123 4567</a>
               </div>
-            </Card>
+            </div>
 
-            <Card className="p-6 bg-card/50 backdrop-blur-md border-white/10 flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
-                <Mail className="w-6 h-6" />
+            <div className="flex items-start gap-5">
+              <div className="w-12 h-12 rounded bg-card border border-white/10 flex items-center justify-center text-primary shrink-0">
+                <Mail className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-1">Email Us</h3>
+                <h3 className="font-bold text-lg text-white mb-1">Email Us</h3>
                 <p className="text-white/60 text-sm mb-2">We reply within 2 hours</p>
-                <a href="mailto:hello@freshlux.co.uk" className="text-lg font-medium hover:text-accent transition-colors">hello@freshlux.co.uk</a>
+                <a href="mailto:hello@freshlux.co.uk" className="text-lg font-bold text-primary hover:text-white transition-colors">hello@freshlux.co.uk</a>
               </div>
-            </Card>
+            </div>
 
-            <Card className="p-6 bg-card/50 backdrop-blur-md border-white/10 flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
-                <MapPin className="w-6 h-6" />
+            <div className="flex items-start gap-5">
+              <div className="w-12 h-12 rounded bg-card border border-white/10 flex items-center justify-center text-primary shrink-0">
+                <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-1">Service Areas</h3>
-                <p className="text-white/60 text-sm leading-relaxed">
+                <h3 className="font-bold text-lg text-white mb-1">Service Areas</h3>
+                <p className="text-white/70 leading-relaxed">
                   London, Manchester, Birmingham, Leeds, Bristol, and surrounding areas.
                 </p>
               </div>
-            </Card>
+            </div>
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card className="p-8 bg-card/50 backdrop-blur-xl border-white/10 shadow-xl">
-              <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
+            <Card className="p-8 md:p-12 bg-card border border-white/10 rounded-xl shadow-xl">
+              <h2 className="text-2xl font-extrabold text-white mb-8">Send a Message</h2>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -107,9 +111,9 @@ export default function Contact() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Name</FormLabel>
+                          <FormLabel className="text-white/80">Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Doe" className="bg-background/50 border-white/10" {...field} />
+                            <Input placeholder="John Doe" className="bg-background border-white/10 h-12 text-white" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -120,9 +124,9 @@ export default function Contact() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel className="text-white/80">Email</FormLabel>
                           <FormControl>
-                            <Input placeholder="john@example.com" className="bg-background/50 border-white/10" {...field} />
+                            <Input placeholder="john@example.com" className="bg-background border-white/10 h-12 text-white" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -135,9 +139,9 @@ export default function Contact() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone (Optional)</FormLabel>
+                          <FormLabel className="text-white/80">Phone (Optional)</FormLabel>
                           <FormControl>
-                            <Input placeholder="07700 900000" className="bg-background/50 border-white/10" {...field} />
+                            <Input placeholder="07700 900000" className="bg-background border-white/10 h-12 text-white" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -148,9 +152,9 @@ export default function Contact() {
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Subject (Optional)</FormLabel>
+                          <FormLabel className="text-white/80">Subject (Optional)</FormLabel>
                           <FormControl>
-                            <Input placeholder="How can we help?" className="bg-background/50 border-white/10" {...field} />
+                            <Input placeholder="How can we help?" className="bg-background border-white/10 h-12 text-white" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -162,15 +166,15 @@ export default function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Message</FormLabel>
+                        <FormLabel className="text-white/80">Message</FormLabel>
                         <FormControl>
-                          <Textarea placeholder="Please describe your enquiry..." className="bg-background/50 border-white/10 min-h-[150px]" {...field} />
+                          <Textarea placeholder="Please describe your enquiry..." className="bg-background border-white/10 min-h-[150px] resize-y text-white p-4" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  <Button type="submit" disabled={submitContact.isPending} className="w-full h-14 text-lg bg-primary hover:bg-primary/90 text-white">
+                  <Button type="submit" disabled={submitContact.isPending} className="w-full h-14 text-lg font-bold bg-primary hover:bg-primary/90 text-white rounded-lg">
                     {submitContact.isPending && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}
                     Send Message
                   </Button>

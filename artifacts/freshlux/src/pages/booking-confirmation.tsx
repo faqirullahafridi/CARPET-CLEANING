@@ -1,9 +1,8 @@
 import { useParams, Link } from "wouter";
 import { useGetBooking } from "@workspace/api-client-react";
-import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Calendar, MapPin, Loader2 } from "lucide-react";
+import { CheckCircle2, Calendar, MapPin, Loader2, ArrowRight } from "lucide-react";
 
 export default function BookingConfirmation() {
   const { bookingNumber } = useParams<{ bookingNumber: string }>();
@@ -13,87 +12,91 @@ export default function BookingConfirmation() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-12 h-12 animate-spin text-accent" />
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-12 h-12 animate-spin text-primary" />
       </div>
     );
   }
 
   if (!booking) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-center p-4">
-        <h1 className="text-3xl font-bold mb-4">Booking Not Found</h1>
-        <p className="text-white/60 mb-8">We couldn't find a booking with reference {bookingNumber}.</p>
-        <Link href="/"><Button>Return Home</Button></Link>
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center text-center p-6">
+        <h1 className="text-4xl font-extrabold text-white mb-4">Booking Not Found</h1>
+        <p className="text-lg text-white/60 mb-8">We couldn't find a booking with reference {bookingNumber}.</p>
+        <Link href="/"><Button className="bg-primary text-white hover:bg-primary/90">Return Home</Button></Link>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-12 relative overflow-hidden">
-      {/* Confetti effect background elements could go here */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-2xl h-[500px] bg-accent/20 rounded-full blur-[120px] pointer-events-none" />
-      
-      <div className="container mx-auto px-4 relative z-10 max-w-2xl">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center mb-10"
-        >
-          <div className="w-24 h-24 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-6 text-accent">
-            <CheckCircle2 className="w-12 h-12" />
+    <div className="min-h-screen bg-background pt-24 pb-12">
+      <div className="container max-w-3xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 text-primary">
+            <CheckCircle2 className="w-10 h-10" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Booking Confirmed!</h1>
-          <p className="text-xl text-white/60">Thank you, {booking.customerName}. Your cleaning is scheduled.</p>
-        </motion.div>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">Booking Confirmed</h1>
+          <p className="text-xl text-white/70">Thank you, {booking.customerName}. Your cleaning is scheduled.</p>
+        </div>
 
-        <Card className="p-8 bg-card/50 backdrop-blur-xl border-white/10 shadow-2xl">
-          <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-6">
-            <div>
-              <p className="text-sm text-white/40 font-medium">Reference Number</p>
-              <p className="text-xl font-mono font-bold text-accent">{booking.bookingNumber}</p>
-            </div>
-            <div className="text-right">
-              <p className="text-sm text-white/40 font-medium">Status</p>
-              <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold capitalize">
-                {booking.status.replace('_', ' ')}
-              </span>
-            </div>
-          </div>
-
-          <div className="space-y-6 mb-8">
-            <div className="flex items-start gap-4">
-              <Calendar className="w-6 h-6 text-primary mt-1" />
+        <Card className="bg-card border border-white/10 rounded-xl overflow-hidden shadow-2xl">
+          <div className="p-8">
+            <div className="flex justify-between items-center border-b border-white/10 pb-6 mb-6">
               <div>
-                <h3 className="font-bold text-lg">{new Date(booking.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h3>
-                <p className="text-white/60">{booking.timeSlot}</p>
+                <p className="text-sm font-bold text-white/50 uppercase tracking-wider mb-1">Reference Number</p>
+                <p className="text-2xl font-mono font-extrabold text-white">{booking.bookingNumber}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-bold text-white/50 uppercase tracking-wider mb-1">Status</p>
+                <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent text-sm font-bold uppercase tracking-wider">
+                  {booking.status.replace('_', ' ')}
+                </span>
               </div>
             </div>
-            
-            <div className="flex items-start gap-4">
-              <MapPin className="w-6 h-6 text-primary mt-1" />
-              <div>
-                <h3 className="font-bold text-lg">{booking.address}</h3>
-                <p className="text-white/60">{booking.postcode}</p>
+
+            <div className="space-y-8 mb-8">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded bg-background border border-white/10 flex items-center justify-center shrink-0">
+                  <Calendar className="w-5 h-5 text-primary" />
+                </div>
+                <div className="pt-1">
+                  <h3 className="font-extrabold text-xl text-white mb-1">{new Date(booking.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h3>
+                  <p className="text-white/70 text-lg">{booking.timeSlot}</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded bg-background border border-white/10 flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-primary" />
+                </div>
+                <div className="pt-1">
+                  <h3 className="font-extrabold text-xl text-white mb-1">{booking.address}</h3>
+                  <p className="text-white/70 text-lg uppercase">{booking.postcode}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-background rounded-xl p-6 border border-white/10">
+              <h3 className="font-bold text-lg text-white mb-4">Order Summary</h3>
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-white/80 font-medium">{booking.serviceName}</span>
+              </div>
+              
+              <div className="border-t border-white/10 pt-4 mt-4 flex justify-between items-center">
+                <span className="font-bold text-white">Estimated Total</span>
+                <span className="font-extrabold text-2xl text-white">£{(booking.totalGbp / 100).toFixed(2)}</span>
               </div>
             </div>
           </div>
-
-          <div className="bg-background/50 rounded-xl p-6 border border-white/5">
-            <h3 className="font-bold mb-4 text-lg">Order Summary</h3>
-            <p className="text-white/80 font-medium mb-4">{booking.serviceName}</p>
-            
-            <div className="border-t border-white/10 pt-4 mt-4 flex justify-between items-center font-bold text-lg">
-              <span>Total Paid</span>
-              <span>£{(booking.totalGbp / 100).toFixed(2)}</span>
-            </div>
+          <div className="bg-white/5 p-6 flex flex-col sm:flex-row gap-4 justify-end border-t border-white/10">
+            <Link href="/contact">
+              <Button variant="outline" className="w-full sm:w-auto border-white/20 text-white hover:bg-white/10">Contact Support</Button>
+            </Link>
+            <Link href="/">
+              <Button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white">Return to Home <ArrowRight className="w-4 h-4 ml-2" /></Button>
+            </Link>
           </div>
         </Card>
-
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="outline" className="border-white/20 text-white">Add to Calendar</Button>
-          <Link href="/"><Button className="bg-primary hover:bg-primary/90 text-white">Return to Home</Button></Link>
-        </div>
       </div>
     </div>
   );
