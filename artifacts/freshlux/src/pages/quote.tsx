@@ -32,14 +32,14 @@ export default function Quote() {
           <div className="text-accent text-sm font-bold tracking-widest uppercase mb-4">
             Transparent Pricing
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Instant Quote Calculator</h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">Get a clear, upfront price for your cleaning needs. No hidden fees, ever.</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-6">Instant Quote Calculator</h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Get a clear, upfront price for your cleaning needs. No hidden fees, ever.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
-            <Card className="p-8 bg-card border border-white/10 rounded-xl">
-              <h2 className="text-xl font-bold mb-6 text-white">1. Select Service</h2>
+            <Card className="p-8 bg-card border border-border rounded-xl shadow-sm">
+              <h2 className="text-xl font-bold mb-6 text-foreground">1. Select Service</h2>
               {isLoading ? (
                 <Loader2 className="w-6 h-6 animate-spin text-primary" />
               ) : (
@@ -51,7 +51,7 @@ export default function Quote() {
                         setServiceId(s.id);
                         setItems([]);
                       }}
-                      className={`p-4 rounded-xl border-2 cursor-pointer transition-colors font-bold ${serviceId === s.id ? 'border-primary bg-primary/10 text-white' : 'border-white/10 hover:border-white/30 text-white/70'}`}
+                      className={`p-4 rounded-xl border-2 cursor-pointer transition-colors font-bold ${serviceId === s.id ? 'border-primary bg-primary/10 text-foreground' : 'border-border hover:border-muted-foreground/30 text-muted-foreground'}`}
                     >
                       {s.name}
                     </div>
@@ -61,8 +61,8 @@ export default function Quote() {
             </Card>
 
             {serviceId && (
-              <Card className="p-8 bg-card border border-white/10 rounded-xl">
-                <h2 className="text-xl font-bold mb-6 text-white">2. Select Items</h2>
+              <Card className="p-8 bg-card border border-border rounded-xl shadow-sm">
+                <h2 className="text-xl font-bold mb-6 text-foreground">2. Select Items</h2>
                 {loadingItems ? (
                   <Loader2 className="w-6 h-6 animate-spin text-primary" />
                 ) : (
@@ -70,16 +70,16 @@ export default function Quote() {
                     {serviceItems?.map(item => {
                       const selected = items.find(i => i.itemId === item.id);
                       return (
-                        <div key={item.id} className="flex items-center justify-between p-4 rounded-lg border border-white/10 bg-background">
+                        <div key={item.id} className="flex items-center justify-between p-4 rounded-lg border border-border bg-background">
                           <div>
-                            <div className="font-bold text-white">{item.name}</div>
-                            <div className="text-sm text-white/50">£{(item.price / 100).toFixed(2)}</div>
+                            <div className="font-bold text-foreground">{item.name}</div>
+                            <div className="text-sm text-muted-foreground">£{item.priceGbp.toFixed(2)}</div>
                           </div>
                           <div className="flex items-center gap-4">
                             <Button 
                               variant="outline" 
                               size="sm"
-                              className="w-8 h-8 rounded-full p-0 border-white/20 text-white hover:bg-white/10"
+                              className="w-8 h-8 rounded-full p-0 border-border text-foreground hover:bg-muted/60"
                               onClick={() => {
                                 setItems(prev => {
                                   const existing = prev.find(i => i.itemId === item.id);
@@ -91,11 +91,11 @@ export default function Quote() {
                             >
                               -
                             </Button>
-                            <span className="w-4 text-center font-bold text-white">{selected?.quantity || 0}</span>
+                            <span className="w-4 text-center font-bold text-foreground">{selected?.quantity || 0}</span>
                             <Button 
                               variant="outline" 
                               size="sm"
-                              className="w-8 h-8 rounded-full p-0 border-white/20 text-white hover:bg-white/10"
+                              className="w-8 h-8 rounded-full p-0 border-border text-foreground hover:bg-muted/60"
                               onClick={() => {
                                 setItems(prev => {
                                   const existing = prev.find(i => i.itemId === item.id);
@@ -111,7 +111,7 @@ export default function Quote() {
                       );
                     })}
                     {(!serviceItems || serviceItems.length === 0) && (
-                      <div className="text-white/50 py-4">No specific items required for this service.</div>
+                      <div className="text-muted-foreground py-4">No specific items required for this service.</div>
                     )}
                   </div>
                 )}
@@ -129,29 +129,29 @@ export default function Quote() {
           
           <div className="lg:col-span-1">
             <div className="sticky top-24">
-              <Card className="p-8 bg-card border border-white/10 rounded-xl flex flex-col min-h-[400px]">
-                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-white border-b border-white/10 pb-4">
+              <Card className="p-8 bg-card border border-border rounded-xl flex flex-col min-h-[400px] shadow-sm">
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-foreground border-b border-border pb-4">
                   <Calculator className="w-5 h-5 text-accent" /> Estimated Price
                 </h2>
                 
                 <div className="flex-1 flex flex-col items-center justify-center py-12">
                   {calculateQuote.data ? (
                     <>
-                      <div className="text-sm font-bold text-white/50 uppercase tracking-wider mb-2">Total Estimate</div>
-                      <span className="text-5xl font-extrabold text-white mb-2">£{(calculateQuote.data.totalGbp / 100).toFixed(2)}</span>
+                      <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-2">Total Estimate</div>
+                      <span className="text-5xl font-extrabold text-foreground mb-2">£{(calculateQuote.data.totalGbp / 100).toFixed(2)}</span>
                       <div className="w-full mt-8 space-y-2 text-sm text-left">
                          {calculateQuote.data.lines.map((line, idx) => (
-                           <div key={idx} className="flex justify-between text-white/70">
+                           <div key={idx} className="flex justify-between text-muted-foreground">
                              <span>{line.description}</span>
-                             <span className="font-bold text-white">£{(line.totalGbp / 100).toFixed(2)}</span>
+                             <span className="font-bold text-foreground">£{(line.totalGbp / 100).toFixed(2)}</span>
                            </div>
                          ))}
                       </div>
                     </>
                   ) : (
                     <>
-                      <span className="text-5xl font-extrabold text-white/20 mb-4">£--.--</span>
-                      <span className="text-sm text-white/40 text-center">Select a service and items<br/>to see your total</span>
+                      <span className="text-5xl font-extrabold text-muted-foreground mb-4">£--.--</span>
+                      <span className="text-sm text-muted-foreground text-center">Select a service and items<br/>to see your total</span>
                     </>
                   )}
                 </div>

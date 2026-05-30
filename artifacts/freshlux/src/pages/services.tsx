@@ -16,15 +16,15 @@ export default function Services() {
   return (
     <div className="min-h-screen pb-24 bg-background">
       {/* Hero */}
-      <section className="pt-24 pb-16 bg-card border-b border-white/5 text-center">
+      <section className="pt-24 pb-16 bg-card border-b border-border text-center">
         <div className="container max-w-4xl mx-auto px-6">
           <div className="text-accent text-sm font-bold tracking-widest uppercase mb-4">
             Professional Cleaning
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-foreground mb-6">
             Premium Cleaning Services
           </h1>
-          <p className="text-lg md:text-xl text-white/70">
+          <p className="text-lg md:text-xl text-muted-foreground">
             Specialist care for your carpets, upholstery, and hard floors across the UK. 
             Transparent pricing, reliable professionals.
           </p>
@@ -46,25 +46,25 @@ export default function Services() {
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                <Card className="bg-card border border-white/10 rounded-xl overflow-hidden flex flex-col md:flex-row">
-                  <div className="md:w-1/3 bg-background border-r border-white/10 p-8 flex flex-col justify-center">
-                    <h2 className="text-2xl font-extrabold text-white mb-2">{service.name}</h2>
-                    <div className="text-sm font-medium text-white/50 uppercase tracking-wider mb-4">Starting from</div>
+                <Card className="bg-card border border-border rounded-xl overflow-hidden flex flex-col md:flex-row shadow-sm">
+                  <div className="md:w-1/3 bg-background border-r border-border p-8 flex flex-col justify-center">
+                    <h2 className="text-2xl font-extrabold text-foreground mb-2">{service.name}</h2>
+                    <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Starting from</div>
                     <div className="text-4xl font-extrabold text-primary">£{service.startingFrom / 100}</div>
                   </div>
                   <div className="md:w-2/3 p-8 flex flex-col">
-                    <p className="text-white/80 text-lg mb-8">{service.description}</p>
+                    <p className="text-muted-foreground text-lg mb-8">{service.description}</p>
                     
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                       {service.features?.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-3">
                           <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                          <span className="text-white/80 font-medium">{feature}</span>
+                          <span className="text-foreground font-medium">{feature}</span>
                         </li>
                       ))}
                     </ul>
                     
-                    <div className="mt-auto pt-6 border-t border-white/10">
+                    <div className="mt-auto pt-6 border-t border-border">
                       <Link href={`/book?service=${service.id}`}>
                         <Button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white rounded-lg px-8 h-12 text-base">
                           Book {service.name} <ArrowRight className="w-4 h-4 ml-2" />

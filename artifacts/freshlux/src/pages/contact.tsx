@@ -55,44 +55,44 @@ export default function Contact() {
           <div className="text-accent text-sm font-bold tracking-widest uppercase mb-4">
             Customer Support
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-white">Get in Touch</h1>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto font-medium">Have a question? We're here to help seven days a week.</p>
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-foreground">Get in Touch</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">Have a question? We're here to help seven days a week.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Contact Info */}
           <div className="space-y-8 lg:col-span-1">
-            <h2 className="text-2xl font-extrabold text-white mb-6">Contact Details</h2>
+            <h2 className="text-2xl font-extrabold text-foreground mb-6">Contact Details</h2>
             
             <div className="flex items-start gap-5">
-              <div className="w-12 h-12 rounded bg-card border border-white/10 flex items-center justify-center text-primary shrink-0">
+              <div className="w-12 h-12 rounded bg-card border border-border flex items-center justify-center text-primary shrink-0">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-white mb-1">Call Us</h3>
-                <p className="text-white/60 text-sm mb-2">Mon-Sun, 8am to 8pm</p>
-                <a href="tel:08001234567" className="text-lg font-bold text-primary hover:text-white transition-colors">0800 123 4567</a>
+                <h3 className="font-bold text-lg text-foreground mb-1">Call Us</h3>
+                <p className="text-muted-foreground text-sm mb-2">Mon-Sun, 8am to 8pm</p>
+                <a href="tel:08001234567" className="text-lg font-bold text-primary hover:text-foreground transition-colors">0800 123 4567</a>
               </div>
             </div>
 
             <div className="flex items-start gap-5">
-              <div className="w-12 h-12 rounded bg-card border border-white/10 flex items-center justify-center text-primary shrink-0">
+              <div className="w-12 h-12 rounded bg-card border border-border flex items-center justify-center text-primary shrink-0">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-white mb-1">Email Us</h3>
-                <p className="text-white/60 text-sm mb-2">We reply within 2 hours</p>
-                <a href="mailto:hello@freshlux.co.uk" className="text-lg font-bold text-primary hover:text-white transition-colors">hello@freshlux.co.uk</a>
+                <h3 className="font-bold text-lg text-foreground mb-1">Email Us</h3>
+                <p className="text-muted-foreground text-sm mb-2">We reply within 2 hours</p>
+                <a href="mailto:hello@freshlux.co.uk" className="text-lg font-bold text-primary hover:text-foreground transition-colors">hello@freshlux.co.uk</a>
               </div>
             </div>
 
             <div className="flex items-start gap-5">
-              <div className="w-12 h-12 rounded bg-card border border-white/10 flex items-center justify-center text-primary shrink-0">
+              <div className="w-12 h-12 rounded bg-card border border-border flex items-center justify-center text-primary shrink-0">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-white mb-1">Service Areas</h3>
-                <p className="text-white/70 leading-relaxed">
+                <h3 className="font-bold text-lg text-foreground mb-1">Service Areas</h3>
+                <p className="text-muted-foreground leading-relaxed">
                   London, Manchester, Birmingham, Leeds, Bristol, and surrounding areas.
                 </p>
               </div>
@@ -101,8 +101,8 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card className="p-8 md:p-12 bg-card border border-white/10 rounded-xl shadow-xl">
-              <h2 className="text-2xl font-extrabold text-white mb-8">Send a Message</h2>
+            <Card className="p-8 md:p-12 bg-card border border-border rounded-xl shadow-md">
+              <h2 className="text-2xl font-extrabold text-foreground mb-8">Send a Message</h2>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -111,9 +111,9 @@ export default function Contact() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/80">Name</FormLabel>
+                          <FormLabel className="text-foreground">Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Doe" className="bg-background border-white/10 h-12 text-white" {...field} />
+                            <Input placeholder="John Doe" className="bg-background border-border h-12 text-foreground" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -124,9 +124,9 @@ export default function Contact() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/80">Email</FormLabel>
+                          <FormLabel className="text-foreground">Email</FormLabel>
                           <FormControl>
-                            <Input placeholder="john@example.com" className="bg-background border-white/10 h-12 text-white" {...field} />
+                            <Input placeholder="john@example.com" className="bg-background border-border h-12 text-foreground" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -139,9 +139,9 @@ export default function Contact() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/80">Phone (Optional)</FormLabel>
+                          <FormLabel className="text-foreground">Phone (Optional)</FormLabel>
                           <FormControl>
-                            <Input placeholder="07700 900000" className="bg-background border-white/10 h-12 text-white" {...field} />
+                            <Input placeholder="07700 900000" className="bg-background border-border h-12 text-foreground" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -152,9 +152,9 @@ export default function Contact() {
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white/80">Subject (Optional)</FormLabel>
+                          <FormLabel className="text-foreground">Subject (Optional)</FormLabel>
                           <FormControl>
-                            <Input placeholder="How can we help?" className="bg-background border-white/10 h-12 text-white" {...field} />
+                            <Input placeholder="How can we help?" className="bg-background border-border h-12 text-foreground" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -166,9 +166,9 @@ export default function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-white/80">Message</FormLabel>
+                        <FormLabel className="text-foreground">Message</FormLabel>
                         <FormControl>
-                          <Textarea placeholder="Please describe your enquiry..." className="bg-background border-white/10 min-h-[150px] resize-y text-white p-4" {...field} />
+                          <Textarea placeholder="Please describe your enquiry..." className="bg-background border-border min-h-[150px] resize-y text-foreground p-4" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
