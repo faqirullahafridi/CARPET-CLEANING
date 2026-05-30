@@ -133,7 +133,7 @@ export default function Book() {
                           >
                             <h3 className="text-lg font-bold mb-2 text-foreground">{service.name}</h3>
                             <p className="text-sm text-muted-foreground mb-4">{service.description}</p>
-                            <span className="text-sm font-bold text-foreground">From £{(service.startingFrom / 100).toFixed(2)}</span>
+                            <span className="text-sm font-medium text-accent">Price discussed on-site</span>
                           </div>
                         ))}
                       </div>
@@ -211,7 +211,9 @@ export default function Book() {
                             <div key={item.id} className={`flex items-center justify-between p-4 rounded-xl border transition-colors ${isSelected ? 'border-primary bg-primary/10' : 'border-border bg-background'}`}>
                               <div>
                                 <div className="font-bold text-foreground">{item.name}</div>
-                                <div className="text-sm text-muted-foreground">£{item.priceGbp.toFixed(2)}</div>
+                                {item.description && (
+                                  <div className="text-sm text-muted-foreground">{item.description}</div>
+                                )}
                               </div>
                               <div className="flex items-center gap-4">
                                 <Button 
@@ -465,7 +467,6 @@ export default function Book() {
                         return (
                           <div key={item.itemId} className="flex justify-between text-sm">
                             <span className="text-muted-foreground">{item.quantity}x {itemData.name}</span>
-                            <span className="text-foreground">£{(itemData.priceGbp * item.quantity).toFixed(2)}</span>
                           </div>
                         )
                       })}
@@ -474,22 +475,14 @@ export default function Book() {
                 )}
 
                 <div className="bg-primary/10 rounded-lg p-4 mt-6">
-                  <div className="flex items-center gap-2 text-accent font-bold text-sm mb-2">
-                    <Info className="w-4 h-4" /> Final price confirmed on arrival
-                  </div>
-                  <div className="flex justify-between items-end mt-4">
-                    <span className="font-bold text-foreground">Estimated Total</span>
-                    <span className="font-extrabold text-2xl text-foreground">
-                      £{
-                        (items.reduce((acc, curr) => {
-                          const price = serviceItems?.find(i => i.id === curr.itemId)?.priceGbp || 0;
-                          return acc + (price * curr.quantity);
-                        }, 0)).toFixed(2)
-                      }
-                    </span>
-                  </div>
-                  <div className="mt-2 text-xs text-muted-foreground text-right">
-                    *Min. £85 applies
+                  <div className="flex items-start gap-2 text-foreground">
+                    <Info className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-sm mb-1">Pricing on-site</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        No online prices are shown. Your technician will assess the work required and discuss the final price with you on-site before starting.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Card>

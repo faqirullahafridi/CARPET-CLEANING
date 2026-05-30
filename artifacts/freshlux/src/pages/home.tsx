@@ -60,7 +60,7 @@ export default function Home() {
                 variants={fadeUp}
                 className="text-lg md:text-xl text-slate-200 mb-10 max-w-xl font-medium drop-shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
               >
-                Book trusted professional cleaners in minutes with instant pricing and same-day availability.
+                Book trusted professional cleaners in minutes with same-day availability. Pricing is discussed on-site.
               </motion.p>
               <motion.div
                 variants={fadeUp}
@@ -120,8 +120,8 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="border-t border-border pt-4 flex justify-between items-center mb-6">
-                  <span className="font-bold text-foreground">Total</span>
-                  <span className="font-bold text-2xl text-foreground">£145</span>
+                  <span className="font-bold text-foreground">Pricing</span>
+                  <span className="font-semibold text-accent text-right text-sm">Discussed on-site</span>
                 </div>
                 <Link href="/book">
                   <Button className="w-full bg-primary hover:bg-primary/90 text-white">

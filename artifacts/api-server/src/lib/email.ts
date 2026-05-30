@@ -37,17 +37,12 @@ interface BookingEmailData {
   couponCode?: string | null;
 }
 
-function formatPrice(gbp: number) {
-  return `£${gbp.toFixed(2)}`;
-}
-
 function buildCustomerEmailHtml(data: BookingEmailData): string {
   const itemRows = data.items
     .map(
       (item) =>
         `<tr>
           <td style="padding:8px 12px;border-bottom:1px solid #1e3a5f;color:#e2e8f0;">${item.name} x${item.quantity}</td>
-          <td style="padding:8px 12px;border-bottom:1px solid #1e3a5f;color:#22d3ee;text-align:right;">${formatPrice(item.lineTotal)}</td>
         </tr>`
     )
     .join("");
@@ -91,22 +86,13 @@ function buildCustomerEmailHtml(data: BookingEmailData): string {
       </table>
     </div>
     <div style="background:#0f1f38;border:1px solid #1e3a5f;border-radius:12px;padding:24px;margin-bottom:24px;">
-      <h2 style="color:#ffffff;font-size:16px;font-weight:700;margin:0 0 16px;">Price Breakdown</h2>
-      <table style="width:100%;border-collapse:collapse;">
-        ${itemRows}
-        <tr>
-          <td style="padding:8px 12px;color:#94a3b8;font-size:13px;">Subtotal</td>
-          <td style="padding:8px 12px;color:#e2e8f0;text-align:right;">${formatPrice(data.subtotalGbp)}</td>
-        </tr>
-        ${data.discountGbp > 0 ? `<tr>
-          <td style="padding:8px 12px;color:#22d3ee;font-size:13px;">Discount ${data.couponCode ? `(${data.couponCode})` : ""}</td>
-          <td style="padding:8px 12px;color:#22d3ee;text-align:right;">-${formatPrice(data.discountGbp)}</td>
-        </tr>` : ""}
-        <tr style="border-top:1px solid #1e3a5f;">
-          <td style="padding:12px 12px 0;color:#ffffff;font-size:16px;font-weight:700;">Total</td>
-          <td style="padding:12px 12px 0;color:#22d3ee;font-size:18px;font-weight:800;text-align:right;">${formatPrice(data.totalGbp)}</td>
-        </tr>
+      <h2 style="color:#ffffff;font-size:16px;font-weight:700;margin:0 0 16px;">Selected Items</h2>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
+        ${itemRows || `<tr><td style="padding:8px 12px;color:#94a3b8;font-size:13px;">Details to be confirmed on-site</td></tr>`}
       </table>
+      <p style="color:#94a3b8;font-size:13px;line-height:1.6;margin:0;">
+        <strong style="color:#22d3ee;">Pricing on-site:</strong> Final pricing will be discussed with you on-site before any work begins.
+      </p>
     </div>
     ${data.notes ? `<div style="background:#0f1f38;border:1px solid #1e3a5f;border-radius:12px;padding:20px;margin-bottom:24px;">
       <h3 style="color:#94a3b8;font-size:13px;margin:0 0 8px;text-transform:uppercase;letter-spacing:1px;">Special Instructions</h3>
@@ -162,7 +148,7 @@ export async function sendBookingNotificationToAdmin(data: BookingEmailData) {
 <p><strong>Service:</strong> ${data.serviceName}</p>
 <p><strong>Date:</strong> ${data.date} ${data.timeSlot}</p>
 <p><strong>Address:</strong> ${data.address}, ${data.postcode}</p>
-<p><strong>Total:</strong> ${formatPrice(data.totalGbp)}</p>
+<p><strong>Pricing:</strong> To be discussed on-site</p>
 ${data.notes ? `<p><strong>Notes:</strong> ${data.notes}</p>` : ""}`,
   });
 

@@ -81,10 +81,22 @@ export default function BookingConfirmation() {
               <div className="flex justify-between items-center mb-4">
                 <span className="text-foreground font-medium">{booking.serviceName}</span>
               </div>
+
+              {Array.isArray(booking.items) && booking.items.length > 0 && (
+                <ul className="space-y-2 mb-4 text-sm text-muted-foreground">
+                  {booking.items.map((item, index) => (
+                    <li key={index}>
+                      {item.quantity}x {item.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
               
-              <div className="border-t border-border pt-4 mt-4 flex justify-between items-center">
-                <span className="font-bold text-foreground">Estimated Total</span>
-                <span className="font-extrabold text-2xl text-foreground">£{Number(booking.totalGbp).toFixed(2)}</span>
+              <div className="border-t border-border pt-4 mt-4">
+                <p className="text-sm font-bold text-foreground mb-1">Pricing</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Final pricing will be discussed on-site with your technician before any work begins.
+                </p>
               </div>
             </div>
           </div>
