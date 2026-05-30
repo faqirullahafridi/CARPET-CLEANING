@@ -10,6 +10,7 @@ import { useLocation } from "wouter";
 import { PostcodeInput } from "@/components/postcode-input";
 import { AddressPicker } from "@/components/address-picker";
 import type { PostcodeLookupResult } from "@/lib/postcodes";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Book() {
   const [step, setStep] = useState(1);
@@ -36,6 +37,7 @@ export default function Book() {
   const { data: services, isLoading: loadingServices } = useListServices();
   const { data: serviceItems, isLoading: loadingItems } = useListServiceItems(serviceId, { query: { enabled: !!serviceId, queryKey: ["items", serviceId] } });
   
+  const { toast } = useToast();
   const createBooking = useCreateBooking();
 
   const nextStep = () => setStep(s => Math.min(s + 1, 4));
@@ -63,7 +65,18 @@ export default function Book() {
     }, {
       onSuccess: (res) => {
         setLocation(`/booking-confirmation/${res.bookingNumber}`);
-      }
+      },
+      onError: (err) => {
+        const description =
+          err instanceof Error
+            ? err.message.replace(/^HTTP \d+[^:]+:\s*/, "")
+            : "Failed to confirm booking. Please try again or contact us.";
+        toast({
+          title: "Booking failed",
+          description,
+          variant: "destructive",
+        });
+      },
     });
   };
 

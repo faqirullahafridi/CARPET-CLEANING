@@ -36,4 +36,18 @@ if (process.env.VERCEL) {
   app.use(router);
 }
 
+app.use(
+  (
+    err: Error,
+    _req: express.Request,
+    res: express.Response,
+    _next: express.NextFunction,
+  ) => {
+    logger.error({ err }, "Unhandled request error");
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  },
+);
+
 export default app;
