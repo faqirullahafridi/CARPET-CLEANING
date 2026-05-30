@@ -31,4 +31,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", router);
 
+// Vercel serverless functions are mounted at /api — requests arrive as /services, not /api/services
+if (process.env.VERCEL) {
+  app.use(router);
+}
+
 export default app;
