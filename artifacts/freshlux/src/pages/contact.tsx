@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Loader2 } from "lucide-react";
 import { useSubmitContact } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
+import { SITE_IMAGES } from "@/lib/site-images";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -51,12 +52,21 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-12">
       <div className="container max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
-          <div className="text-accent text-sm font-bold tracking-widest uppercase mb-4">
-            Customer Support
+        <div className="relative mb-20 overflow-hidden rounded-2xl border border-border min-h-[220px] md:min-h-[280px] flex items-center justify-center text-center">
+          <img
+            src={SITE_IMAGES.gallery.teamVan}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-[#081120]/75" />
+          <div className="relative z-10 px-6 py-12 max-w-2xl">
+            <div className="text-[#22D3EE] text-sm font-bold tracking-widest uppercase mb-4">
+              Customer Support
+            </div>
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">Get in Touch</h1>
+            <p className="text-lg text-slate-200 font-medium">Have a question? We&apos;re here to help seven days a week.</p>
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-foreground">Get in Touch</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">Have a question? We're here to help seven days a week.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
@@ -96,6 +106,14 @@ export default function Contact() {
                   London, Manchester, Birmingham, Leeds, Bristol, and surrounding areas.
                 </p>
               </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-xl border border-border aspect-[4/3] hidden lg:block">
+              <img
+                src={SITE_IMAGES.gallery.stairs}
+                alt="Freshly cleaned stairs and carpet"
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
 

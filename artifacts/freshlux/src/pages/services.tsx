@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Loader2, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-import { getServiceImage } from "@/lib/site-images";
+import { getServiceImage, SITE_IMAGES } from "@/lib/site-images";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -17,8 +17,15 @@ export default function Services() {
   return (
     <div className="min-h-screen pb-24 bg-background">
       {/* Hero */}
-      <section className="pt-24 pb-16 bg-card border-b border-border text-center">
-        <div className="container max-w-4xl mx-auto px-6">
+      <section className="relative pt-24 pb-16 border-b border-border text-center overflow-hidden">
+        <img
+          src={SITE_IMAGES.gallery.office}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-background/88" />
+        <div className="container max-w-4xl mx-auto px-6 relative z-10">
           <div className="text-accent text-sm font-bold tracking-widest uppercase mb-4">
             Professional Cleaning
           </div>

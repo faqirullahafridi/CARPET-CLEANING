@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Shield, Award, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { SITE_IMAGES } from "@/lib/site-images";
+import { SITE_IMAGES, GALLERY_ITEMS } from "@/lib/site-images";
 
 export default function About() {
   return (
@@ -75,7 +75,7 @@ export default function About() {
           <div className="relative">
             <div className="aspect-square rounded-2xl overflow-hidden border border-border shadow-lg">
               <img
-                src={SITE_IMAGES.hero}
+                src={SITE_IMAGES.gallery.bedroom}
                 alt="Professional carpet cleaning in a UK home"
                 className="w-full h-full object-cover"
               />
@@ -85,6 +85,26 @@ export default function About() {
               <h3 className="text-lg font-extrabold text-foreground mb-1">Award Winning</h3>
               <p className="text-sm text-muted-foreground">Excellence in domestic and commercial cleaning across the UK.</p>
             </div>
+          </div>
+        </div>
+
+        {/* Photo strip */}
+        <div className="mb-24">
+          <h2 className="text-3xl font-extrabold text-foreground mb-4 text-center">Life After a Professional Clean</h2>
+          <div className="w-12 h-1 bg-accent mx-auto mb-10" />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {GALLERY_ITEMS.slice(0, 6).map((item) => (
+              <div key={item.src} className="relative overflow-hidden rounded-xl border border-border aspect-[4/3] group">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                  <p className="text-sm font-semibold text-white">{item.caption}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

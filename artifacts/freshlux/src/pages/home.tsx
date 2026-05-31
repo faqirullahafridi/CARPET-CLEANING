@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2, Star, Clock, Shield, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { SITE_IMAGES } from "@/lib/site-images";
+import { SITE_IMAGES, GALLERY_ITEMS } from "@/lib/site-images";
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -221,13 +221,16 @@ export default function Home() {
             <div className="hidden md:block absolute top-12 left-1/6 right-1/6 h-px bg-border" />
             
             {[
-              { step: "01", title: "Book Online", desc: "Choose your service, property details, and see pricing as you go." },
-              { step: "02", title: "Choose a Date", desc: "Pick a convenient time slot, including same-day availability." },
-              { step: "03", title: "We Clean", desc: "Our professionals arrive and transform your carpets." }
+              { step: "01", title: "Book Online", desc: "Choose your service, property details, and preferred appointment time.", image: SITE_IMAGES.gallery.teamVan },
+              { step: "02", title: "Choose a Date", desc: "Pick a convenient time slot, including same-day availability.", image: SITE_IMAGES.gallery.hallway },
+              { step: "03", title: "We Clean", desc: "Our professionals arrive and transform your carpets.", image: SITE_IMAGES.gallery.stainTreatment }
             ].map((item, i) => (
               <div key={i} className="relative flex flex-col items-center text-center">
-                <div className="w-24 h-24 bg-background border-2 border-primary rounded-xl flex items-center justify-center text-2xl font-extrabold text-primary mb-6 z-10">
-                  {item.step}
+                <div className="relative w-full max-w-[280px] mb-6 z-10 overflow-hidden rounded-2xl border border-border shadow-md">
+                  <img src={item.image} alt="" className="h-40 w-full object-cover" />
+                  <div className="absolute top-3 left-3 w-12 h-12 bg-background/95 border-2 border-primary rounded-xl flex items-center justify-center text-lg font-extrabold text-primary">
+                    {item.step}
+                  </div>
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-foreground">{item.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
@@ -266,7 +269,7 @@ export default function Home() {
                 "Advanced hot water extraction",
                 "Eco-friendly solutions",
                 "100% satisfaction guarantee",
-                "Instant upfront pricing",
+                "Pricing discussed on-site",
                 "Same-day availability",
                 "No hidden fees",
                 "Fully insured up to £5M"
@@ -310,6 +313,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Photo Gallery */}
+      <section className="py-24 bg-background">
+        <div className="container max-w-7xl mx-auto px-6">
+          <div className="mb-16 text-center">
+            <h2 className="text-4xl font-extrabold text-foreground mb-4">Our Work in Action</h2>
+            <div className="w-16 h-1 bg-accent mx-auto mb-6" />
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Real homes and businesses across the UK — fresh carpets, spotless upholstery, and professional results.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[180px] md:auto-rows-[220px]">
+            {GALLERY_ITEMS.map((item, i) => (
+              <motion.div
+                key={item.src}
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className={`group relative overflow-hidden rounded-2xl border border-border shadow-sm ${
+                  i === 0 ? "col-span-2 row-span-2" : i === 3 ? "col-span-2" : ""
+                }`}
+              >
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#081120]/80 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+                <p className="absolute bottom-4 left-4 right-4 text-sm font-bold text-white drop-shadow-md">
+                  {item.caption}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-24 bg-background">
         <div className="container max-w-3xl mx-auto px-6">
@@ -348,8 +389,15 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-primary text-center">
-        <div className="container max-w-4xl mx-auto px-6">
+      <section className="relative py-24 text-center overflow-hidden">
+        <img
+          src={SITE_IMAGES.gallery.bedroom}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-primary/90" />
+        <div className="container max-w-4xl mx-auto px-6 relative z-10">
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Ready for cleaner carpets?</h2>
           <p className="text-xl text-white mb-10 font-medium">Join 10,000+ satisfied customers across the UK.</p>
           <Link href="/book">
