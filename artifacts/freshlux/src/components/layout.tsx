@@ -39,7 +39,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <Link href="/contact" className="text-foreground/70 hover:text-foreground transition-colors">Contact</Link>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4">
             <Link href="/book">
               <Button className="rounded-lg px-6 font-semibold bg-primary hover:bg-primary/90 text-white transition-all">
                 Book Now
