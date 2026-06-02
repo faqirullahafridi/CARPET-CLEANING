@@ -1,9 +1,11 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
 import { useEffect } from "react";
 import { BrandMark } from "@/components/brand-mark";
+import { CONTACT } from "@/lib/contact-info";
+import { openWhatsAppChat } from "@/lib/whatsapp-booking";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -91,11 +93,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <ul className="space-y-4 text-sm text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <Phone className="w-4 h-4 mt-0.5 text-accent" />
-                  <span>0800 123 4567</span>
+                  <a href={`tel:${CONTACT.phoneTel}`} className="hover:text-primary transition-colors">
+                    {CONTACT.phone}
+                  </a>
                 </li>
                 <li className="flex items-start gap-3">
                   <Mail className="w-4 h-4 mt-0.5 text-accent" />
-                  <span>hello@carpetcleaning.co.uk</span>
+                  <a href={`mailto:${CONTACT.email}`} className="hover:text-primary transition-colors break-all">
+                    {CONTACT.email}
+                  </a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MessageCircle className="w-4 h-4 mt-0.5 text-[#25D366]" />
+                  <button
+                    type="button"
+                    onClick={() => openWhatsAppChat("Hi, I would like to enquire about carpet cleaning.")}
+                    className="hover:text-primary transition-colors text-left"
+                  >
+                    WhatsApp {CONTACT.whatsappDisplay}
+                  </button>
                 </li>
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 mt-0.5 text-accent" />
@@ -114,6 +130,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </footer>
+
+      <button
+        type="button"
+        onClick={() => openWhatsAppChat("Hi, I would like to book a carpet cleaning.")}
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-bold text-white shadow-lg shadow-black/20 transition-transform hover:scale-105 hover:bg-[#20bd5a] md:px-5 md:py-3.5"
+        aria-label="Chat on WhatsApp"
+      >
+        <MessageCircle className="h-5 w-5" />
+        <span className="hidden sm:inline">WhatsApp</span>
+      </button>
     </div>
   );
 }

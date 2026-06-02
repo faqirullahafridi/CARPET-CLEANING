@@ -10,6 +10,7 @@ import Home from "./pages/home";
 import Book from "./pages/book";
 import Services from "./pages/services";
 import BookingConfirmation from "./pages/booking-confirmation";
+import BookingSent from "./pages/booking-sent";
 import Contact from "./pages/contact";
 import About from "./pages/about";
 import Terms from "./pages/terms";
@@ -32,6 +33,7 @@ function Router() {
         <Route path="/book" component={Book} />
         <Route path="/services" component={Services} />
         <Route path="/booking-confirmation/:bookingNumber" component={BookingConfirmation} />
+        <Route path="/booking-sent" component={BookingSent} />
         <Route path="/contact" component={Contact} />
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />

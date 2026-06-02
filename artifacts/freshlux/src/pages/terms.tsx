@@ -1,3 +1,5 @@
+import { CONTACT } from "@/lib/contact-info";
+
 export default function Terms() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-16">
@@ -125,8 +127,9 @@ export default function Terms() {
             </p>
             <div className="mt-4 p-5 bg-card border border-border rounded-xl text-muted-foreground">
               <p className="font-semibold text-foreground">Carpet Cleaning Ltd</p>
-              <p>Email: hello@carpetcleaning.co.uk</p>
-              <p>Phone: 0800 123 4567</p>
+              <p>Email: {CONTACT.email}</p>
+              <p>Phone: {CONTACT.phone}</p>
+              <p>WhatsApp: {CONTACT.whatsappDisplay}</p>
               <p>London, United Kingdom</p>
             </div>
           </section>

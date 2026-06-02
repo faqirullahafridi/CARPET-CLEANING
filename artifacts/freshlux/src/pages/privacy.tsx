@@ -1,3 +1,5 @@
+import { CONTACT } from "@/lib/contact-info";
+
 export default function Privacy() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-16">
@@ -95,7 +97,7 @@ export default function Privacy() {
               <li><span className="font-semibold text-foreground">Right to withdraw consent:</span> Withdraw consent for marketing at any time.</li>
             </ul>
             <p className="text-muted-foreground leading-relaxed mt-4">
-              To exercise any of these rights, contact us at hello@carpetcleaning.co.uk. We will respond within 30 days.
+              To exercise any of these rights, contact us at {CONTACT.email}. We will respond within 30 days.
               You also have the right to lodge a complaint with the Information Commissioner's Office (ICO) at ico.org.uk.
             </p>
           </section>
@@ -135,8 +137,9 @@ export default function Privacy() {
             </p>
             <div className="mt-4 p-5 bg-card border border-border rounded-xl text-muted-foreground">
               <p className="font-semibold text-foreground">Carpet Cleaning Ltd — Data Controller</p>
-              <p>Email: hello@carpetcleaning.co.uk</p>
-              <p>Phone: 0800 123 4567</p>
+              <p>Email: {CONTACT.email}</p>
+              <p>Phone: {CONTACT.phone}</p>
+              <p>WhatsApp: {CONTACT.whatsappDisplay}</p>
               <p>London, United Kingdom</p>
             </div>
           </section>

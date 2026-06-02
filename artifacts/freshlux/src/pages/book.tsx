@@ -11,6 +11,7 @@ import { PostcodeInput } from "@/components/postcode-input";
 import { AddressPicker } from "@/components/address-picker";
 import type { PostcodeLookupResult } from "@/lib/postcodes";
 import { useToast } from "@/hooks/use-toast";
+import { buildBookingWhatsAppMessage, openWhatsAppWithMessage } from "@/lib/whatsapp-booking";
 
 export default function Book() {
   const [step, setStep] = useState(1);
@@ -45,39 +46,67 @@ export default function Book() {
 
   const handleBooking = () => {
     if (!serviceId || !date || !timeSlot || !customer.name || !customer.email || !customer.phone || !customer.address || !postcodeDetails) {
-        return; // Validation would go here
+        return;
     }
 
-    createBooking.mutate({
-      data: {
-        serviceId,
-        items,
-        date: date.toISOString().split('T')[0],
-        timeSlot,
-        customerName: customer.name,
-        customerEmail: customer.email,
-        customerPhone: customer.phone,
-        address: customer.address,
-        postcode: postcodeDetails?.postcode ?? postcode,
-        notes: customer.notes,
-        propertyType
-      }
-    }, {
-      onSuccess: (res) => {
-        setLocation(`/booking-confirmation/${res.bookingNumber}`);
+    const serviceName = services?.find((s) => s.id === serviceId)?.name ?? serviceId;
+    const selectedItems = items
+      .map((item) => {
+        const itemData = serviceItems?.find((i) => i.id === item.itemId);
+        return itemData ? { name: itemData.name, quantity: item.quantity } : null;
+      })
+      .filter((item): item is { name: string; quantity: number } => item !== null);
+
+    const whatsappPayload = {
+      serviceName,
+      propertyType,
+      postcode: postcodeDetails.postcode,
+      address: customer.address,
+      items: selectedItems,
+      date: date.toISOString().split("T")[0],
+      timeSlot,
+      customerName: customer.name,
+      customerEmail: customer.email,
+      customerPhone: customer.phone,
+      notes: customer.notes || undefined,
+    };
+
+    const bookingData = {
+      serviceId,
+      items,
+      date: whatsappPayload.date,
+      timeSlot,
+      customerName: customer.name,
+      customerEmail: customer.email,
+      customerPhone: customer.phone,
+      address: customer.address,
+      postcode: postcodeDetails.postcode,
+      notes: customer.notes,
+      propertyType,
+    };
+
+    createBooking.mutate(
+      { data: bookingData },
+      {
+        onSuccess: (res) => {
+          openWhatsAppWithMessage(
+            buildBookingWhatsAppMessage({
+              ...whatsappPayload,
+              bookingNumber: res.bookingNumber,
+            }),
+          );
+          setLocation(`/booking-confirmation/${res.bookingNumber}`);
+        },
+        onError: () => {
+          openWhatsAppWithMessage(buildBookingWhatsAppMessage(whatsappPayload));
+          toast({
+            title: "Opening WhatsApp",
+            description: "Send the pre-filled message to complete your booking request.",
+          });
+          setLocation("/booking-sent");
+        },
       },
-      onError: (err) => {
-        const description =
-          err instanceof Error
-            ? err.message.replace(/^HTTP \d+[^:]+:\s*/, "")
-            : "Failed to confirm booking. Please try again or contact us.";
-        toast({
-          title: "Booking failed",
-          description,
-          variant: "destructive",
-        });
-      },
-    });
+    );
   };
 
   const steps = [
@@ -357,7 +386,7 @@ export default function Book() {
                           value={customer.phone}
                           onChange={(e) => setCustomer({...customer, phone: e.target.value})}
                           className="bg-background border-border h-11 text-foreground" 
-                          placeholder="07700 900000"
+                          placeholder={CONTACT.phone}
                         />
                       </div>
                       <div>
@@ -393,7 +422,7 @@ export default function Book() {
                         className="bg-primary hover:bg-primary/90 text-white font-bold h-12 px-8 rounded-lg"
                       >
                         {createBooking.isPending && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
-                        Confirm Booking
+                        Confirm & Send via WhatsApp
                       </Button>
                     </div>
                   </motion.div>
@@ -481,6 +510,9 @@ export default function Book() {
                       <p className="font-bold text-sm mb-1">Pricing on-site</p>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         No online prices are shown. Your technician will assess the work required and discuss the final price with you on-site before starting.
+                      </p>
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                        When you confirm, WhatsApp opens with your booking details — tap Send to complete your request.
                       </p>
                     </div>
                   </div>

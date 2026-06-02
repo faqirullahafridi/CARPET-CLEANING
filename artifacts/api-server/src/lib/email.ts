@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { logger } from "./logger";
+import { CONTACT } from "./contact-info";
 
 function createTransporter() {
   const host = process.env.SMTP_HOST;
@@ -100,7 +101,7 @@ function buildCustomerEmailHtml(data: BookingEmailData): string {
     </div>` : ""}
     <div style="text-align:center;padding:24px 0;border-top:1px solid #1e3a5f;">
       <p style="color:#64748b;font-size:13px;margin:0 0 8px;">Questions? Contact us anytime</p>
-      <p style="color:#22d3ee;font-size:13px;margin:0;font-weight:600;">hello@carpetcleaning.co.uk · 0800 123 4567</p>
+      <p style="color:#22d3ee;font-size:13px;margin:0;font-weight:600;">${CONTACT.email} · ${CONTACT.phone} · WhatsApp ${CONTACT.whatsappDisplay}</p>
     </div>
     <div style="text-align:center;padding-top:16px;">
       <p style="color:#475569;font-size:12px;margin:0;">Carpet Cleaning UK · Fully Insured & Certified</p>
@@ -112,7 +113,7 @@ function buildCustomerEmailHtml(data: BookingEmailData): string {
 
 export async function sendBookingConfirmationToCustomer(data: BookingEmailData) {
   const transporter = createTransporter();
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@carpetcleaning.co.uk";
+  const adminEmail = process.env.ADMIN_EMAIL || CONTACT.email;
 
   if (!transporter) {
     logger.info({ bookingNumber: data.bookingNumber, to: data.customerEmail }, "Email: customer booking confirmation (not sent — SMTP not configured)");
@@ -131,7 +132,7 @@ export async function sendBookingConfirmationToCustomer(data: BookingEmailData) 
 
 export async function sendBookingNotificationToAdmin(data: BookingEmailData) {
   const transporter = createTransporter();
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@carpetcleaning.co.uk";
+  const adminEmail = process.env.ADMIN_EMAIL || CONTACT.email;
 
   if (!transporter) {
     logger.info({ bookingNumber: data.bookingNumber }, "Email: admin booking notification (not sent — SMTP not configured)");
@@ -163,7 +164,7 @@ export async function sendContactNotification(data: {
   message: string;
 }) {
   const transporter = createTransporter();
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@carpetcleaning.co.uk";
+  const adminEmail = process.env.ADMIN_EMAIL || CONTACT.email;
 
   if (!transporter) {
     logger.info({ from: data.email }, "Email: contact form submission (not sent — SMTP not configured)");

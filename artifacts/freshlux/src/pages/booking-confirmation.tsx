@@ -2,7 +2,8 @@ import { useParams, Link } from "wouter";
 import { useGetBooking } from "@workspace/api-client-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Calendar, MapPin, Loader2, ArrowRight } from "lucide-react";
+import { CheckCircle2, Calendar, MapPin, Loader2, ArrowRight, MessageCircle } from "lucide-react";
+import { CONTACT } from "@/lib/contact-info";
 
 export default function BookingConfirmation() {
   const { bookingNumber } = useParams<{ bookingNumber: string }>();
@@ -96,6 +97,13 @@ export default function BookingConfirmation() {
                 <p className="text-sm font-bold text-foreground mb-1">Pricing</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Final pricing will be discussed on-site with your technician before any work begins.
+                </p>
+              </div>
+              <div className="border-t border-border pt-4 mt-4 flex items-start gap-3">
+                <MessageCircle className="w-5 h-5 text-[#25D366] shrink-0 mt-0.5" />
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  WhatsApp should have opened with your booking details. If you have not sent it yet, please message us on{" "}
+                  <strong className="text-foreground">{CONTACT.whatsappDisplay}</strong> to confirm.
                 </p>
               </div>
             </div>

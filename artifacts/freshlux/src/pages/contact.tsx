@@ -6,10 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Loader2 } from "lucide-react";
+import { MapPin, Phone, Mail, Loader2, MessageCircle } from "lucide-react";
 import { useSubmitContact } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
 import { SITE_IMAGES } from "@/lib/site-images";
+import { CONTACT } from "@/lib/contact-info";
+import { openWhatsAppChat } from "@/lib/whatsapp-booking";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -81,7 +83,7 @@ export default function Contact() {
               <div>
                 <h3 className="font-bold text-lg text-foreground mb-1">Call Us</h3>
                 <p className="text-muted-foreground text-sm mb-2">Mon-Sun, 8am to 8pm</p>
-                <a href="tel:08001234567" className="text-lg font-bold text-primary hover:text-foreground transition-colors">0800 123 4567</a>
+                <a href={`tel:${CONTACT.phoneTel}`} className="text-lg font-bold text-primary hover:text-foreground transition-colors">{CONTACT.phone}</a>
               </div>
             </div>
 
@@ -92,7 +94,7 @@ export default function Contact() {
               <div>
                 <h3 className="font-bold text-lg text-foreground mb-1">Email Us</h3>
                 <p className="text-muted-foreground text-sm mb-2">We reply within 2 hours</p>
-                <a href="mailto:hello@carpetcleaning.co.uk" className="text-lg font-bold text-primary hover:text-foreground transition-colors">hello@carpetcleaning.co.uk</a>
+                <a href={`mailto:${CONTACT.email}`} className="text-lg font-bold text-primary hover:text-foreground transition-colors break-all">{CONTACT.email}</a>
               </div>
             </div>
 
@@ -105,6 +107,23 @@ export default function Contact() {
                 <p className="text-muted-foreground leading-relaxed">
                   London, Manchester, Birmingham, Leeds, Bristol, and surrounding areas.
                 </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-5">
+              <div className="w-12 h-12 rounded bg-card border border-border flex items-center justify-center text-[#25D366] shrink-0">
+                <MessageCircle className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-bold text-lg text-foreground mb-1">WhatsApp</h3>
+                <p className="text-muted-foreground text-sm mb-2">Fastest way to book or ask a question</p>
+                <button
+                  type="button"
+                  onClick={() => openWhatsAppChat("Hi, I would like to enquire about carpet cleaning.")}
+                  className="text-lg font-bold text-[#25D366] hover:text-foreground transition-colors"
+                >
+                  {CONTACT.whatsappDisplay}
+                </button>
               </div>
             </div>
 
@@ -159,7 +178,7 @@ export default function Contact() {
                         <FormItem>
                           <FormLabel className="text-foreground">Phone (Optional)</FormLabel>
                           <FormControl>
-                            <Input placeholder="07700 900000" className="bg-background border-border h-12 text-foreground" {...field} />
+                            <Input placeholder={CONTACT.phone} className="bg-background border-border h-12 text-foreground" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
