@@ -104,16 +104,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
-                  <MessageCircle className="w-4 h-4 mt-0.5 text-[#25D366]" />
-                  <button
-                    type="button"
-                    onClick={() => openWhatsAppChat("Hi, I would like to enquire about carpet cleaning.")}
-                    className="hover:text-primary transition-colors text-left"
-                  >
-                    WhatsApp {CONTACT.whatsappDisplay}
-                  </button>
-                </li>
-                <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 mt-0.5 text-accent" />
                   <span>London, Manchester, Birmingham & Nationwide</span>
                 </li>
