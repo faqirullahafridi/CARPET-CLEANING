@@ -24,8 +24,16 @@ services:
     env_file:
       - ./evolution/.env
     depends_on:
-      - postgres
-      - redis
+      postgres:
+        condition: service_started
+      redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 30s
 
 volumes:
   evolution_pg:

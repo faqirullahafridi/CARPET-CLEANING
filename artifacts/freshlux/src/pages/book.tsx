@@ -90,13 +90,21 @@ export default function Book() {
       { data: bookingData },
       {
         onSuccess: (res) => {
-          setLocation(`/booking-confirmation/${res.bookingNumber}`);
+          const message = buildBookingWhatsAppMessage({
+            ...whatsappPayload,
+            bookingNumber: res.bookingNumber,
+          });
+          sessionStorage.setItem("pendingWhatsAppMessage", message);
+          openWhatsAppWithMessage(message);
+          setLocation("/booking-sent");
         },
         onError: () => {
-          openWhatsAppWithMessage(buildBookingWhatsAppMessage(whatsappPayload));
+          const message = buildBookingWhatsAppMessage(whatsappPayload);
+          sessionStorage.setItem("pendingWhatsAppMessage", message);
+          openWhatsAppWithMessage(message);
           toast({
             title: "Opening WhatsApp",
-            description: "Send the pre-filled message to complete your booking request.",
+            description: "Tap Send in WhatsApp to complete your booking request.",
           });
           setLocation("/booking-sent");
         },
@@ -507,7 +515,7 @@ export default function Book() {
                         No online prices are shown. Your technician will assess the work required and discuss the final price with you on-site before starting.
                       </p>
                       <p className="text-sm text-muted-foreground leading-relaxed mt-3">
-                        When you confirm, your booking is saved and we notify our team automatically. If that fails, WhatsApp opens as a backup.
+                        When you confirm, WhatsApp opens with your booking details. Tap <strong>Send</strong> in WhatsApp so our team receives your request.
                       </p>
                     </div>
                   </div>

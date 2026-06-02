@@ -7,7 +7,6 @@ import {
   sendBookingNotificationToAdmin,
 } from "../lib/email";
 import { respondWithDbError } from "../lib/db-errors";
-import { fireBookingWhatsAppNotification } from "../lib/booking-notifications";
 
 const router = Router();
 
@@ -150,27 +149,6 @@ router.post("/bookings", async (req, res) => {
       sendBookingConfirmationToCustomer(emailData),
       sendBookingNotificationToAdmin(emailData),
     ]).catch((err) => req.log.error({ err }, "Failed to send booking emails"));
-
-    fireBookingWhatsAppNotification(
-      {
-        bookingNumber,
-        serviceName: service.name,
-        propertyType: propertyType || null,
-        date,
-        timeSlot,
-        address,
-        postcode,
-        customerName,
-        customerEmail,
-        customerPhone,
-        notes,
-        items: lines.map((line) => ({
-          name: line.name,
-          quantity: line.quantity,
-        })),
-      },
-      req.log,
-    );
 
     res.status(201).json({
       id: booking.id,
