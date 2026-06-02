@@ -102,8 +102,7 @@ export default function BookingConfirmation() {
               <div className="border-t border-border pt-4 mt-4 flex items-start gap-3">
                 <MessageCircle className="w-5 h-5 text-[#25D366] shrink-0 mt-0.5" />
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  WhatsApp should have opened with your booking details. If you have not sent it yet, please message us on{" "}
-                  <strong className="text-foreground">{CONTACT.whatsappDisplay}</strong> to confirm.
+                  We&apos;ve notified our team on WhatsApp ({CONTACT.whatsappDisplay}). We&apos;ll confirm your appointment shortly.
                 </p>
               </div>
             </div>

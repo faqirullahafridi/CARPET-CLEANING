@@ -89,12 +89,6 @@ export default function Book() {
       { data: bookingData },
       {
         onSuccess: (res) => {
-          openWhatsAppWithMessage(
-            buildBookingWhatsAppMessage({
-              ...whatsappPayload,
-              bookingNumber: res.bookingNumber,
-            }),
-          );
           setLocation(`/booking-confirmation/${res.bookingNumber}`);
         },
         onError: () => {
@@ -422,7 +416,7 @@ export default function Book() {
                         className="bg-primary hover:bg-primary/90 text-white font-bold h-12 px-8 rounded-lg"
                       >
                         {createBooking.isPending && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
-                        Confirm & Send via WhatsApp
+                        Confirm Booking
                       </Button>
                     </div>
                   </motion.div>
@@ -512,7 +506,7 @@ export default function Book() {
                         No online prices are shown. Your technician will assess the work required and discuss the final price with you on-site before starting.
                       </p>
                       <p className="text-sm text-muted-foreground leading-relaxed mt-3">
-                        When you confirm, WhatsApp opens with your booking details — tap Send to complete your request.
+                        When you confirm, your booking is saved and we notify our team automatically. If that fails, WhatsApp opens as a backup.
                       </p>
                     </div>
                   </div>

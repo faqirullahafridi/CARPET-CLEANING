@@ -1,0 +1,11 @@
+services:
+  waha:
+    image: devlikeapro/waha
+    container_name: carpet-clean-waha
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./waha/.env
+    volumes:
+      - ./waha/sessions:/app/.sessions
