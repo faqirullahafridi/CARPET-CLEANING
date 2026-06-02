@@ -7,6 +7,7 @@ import bookingsRouter from "./bookings";
 import availabilityRouter from "./availability";
 import contactRouter from "./contact";
 import addressesRouter from "./addresses";
+import evolutionRouter from "./evolution";
 
 const router: IRouter = Router();
 
@@ -18,5 +19,6 @@ router.use(bookingsRouter);
 router.use(availabilityRouter);
 router.use(contactRouter);
 router.use(addressesRouter);
+router.use(evolutionRouter);
 
 export default router;

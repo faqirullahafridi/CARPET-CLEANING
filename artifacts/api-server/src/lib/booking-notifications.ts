@@ -1,20 +1,24 @@
 import {
   buildBookingWhatsAppMessage,
-  phoneToWhatsAppChatId,
+  phoneToEvolutionNumber,
   type BookingWhatsAppPayload,
 } from "./whatsapp-message";
-import { isWahaConfigured, sendWhatsAppText, sendWhatsAppToAdmin } from "./waha";
+import {
+  isEvolutionConfigured,
+  sendWhatsAppText,
+  sendWhatsAppToAdmin,
+} from "./evolution-api";
 
 export async function notifyBookingViaWhatsApp(data: BookingWhatsAppPayload): Promise<void> {
-  if (!isWahaConfigured()) {
+  if (!isEvolutionConfigured()) {
     return;
   }
 
   const adminMessage = buildBookingWhatsAppMessage(data);
   await sendWhatsAppToAdmin(adminMessage);
 
-  const customerChatId = phoneToWhatsAppChatId(data.customerPhone);
-  if (customerChatId) {
+  const customerNumber = phoneToEvolutionNumber(data.customerPhone);
+  if (customerNumber) {
     const customerMessage = [
       `Hi ${data.customerName},`,
       "",
@@ -29,7 +33,7 @@ export async function notifyBookingViaWhatsApp(data: BookingWhatsAppPayload): Pr
       .filter(Boolean)
       .join("\n");
 
-    await sendWhatsAppText({ chatId: customerChatId, text: customerMessage });
+    await sendWhatsAppText({ number: customerNumber, text: customerMessage });
   }
 }
 
@@ -40,7 +44,7 @@ export async function notifyContactViaWhatsApp(data: {
   subject?: string | null;
   message: string;
 }): Promise<void> {
-  if (!isWahaConfigured()) {
+  if (!isEvolutionConfigured()) {
     return;
   }
 
@@ -66,7 +70,7 @@ export function fireBookingWhatsAppNotification(
   log: { error: (obj: object, msg: string) => void },
 ): void {
   notifyBookingViaWhatsApp(data).catch((err) =>
-    log.error({ err }, "Failed to send booking WhatsApp via WAHA"),
+    log.error({ err }, "Failed to send booking WhatsApp via Evolution API"),
   );
 }
 
@@ -75,6 +79,6 @@ export function fireContactWhatsAppNotification(
   log: { error: (obj: object, msg: string) => void },
 ): void {
   notifyContactViaWhatsApp(data).catch((err) =>
-    log.error({ err }, "Failed to send contact WhatsApp via WAHA"),
+    log.error({ err }, "Failed to send contact WhatsApp via Evolution API"),
   );
 }

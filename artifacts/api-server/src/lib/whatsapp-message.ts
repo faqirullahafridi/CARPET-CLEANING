@@ -46,8 +46,7 @@ export function buildBookingWhatsAppMessage(data: BookingWhatsAppPayload): strin
   return lines.filter((line) => line !== null).join("\n");
 }
 
-/** Convert a phone string to WAHA chatId (e.g. 923109766610@c.us). */
-export function phoneToWhatsAppChatId(phone: string): string | null {
+function normalizePhoneDigits(phone: string): string | null {
   let digits = phone.replace(/\D/g, "");
   if (!digits) return null;
 
@@ -65,5 +64,18 @@ export function phoneToWhatsAppChatId(phone: string): string | null {
 
   if (digits.length < 10) return null;
 
-  return `${digits}@c.us`;
+  return digits;
+}
+
+/** Evolution API expects digits with country code (e.g. 447533552015). */
+export function normalizeEvolutionNumber(number: string): string {
+  const trimmed = number.trim();
+  if (trimmed.includes("@")) {
+    return trimmed.split("@")[0].replace(/\D/g, "");
+  }
+  return trimmed.replace(/\D/g, "");
+}
+
+export function phoneToEvolutionNumber(phone: string): string | null {
+  return normalizePhoneDigits(phone);
 }

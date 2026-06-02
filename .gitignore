@@ -48,5 +48,5 @@ Thumbs.db
 .cache/
 .local/
 
-# WAHA WhatsApp server (credentials + sessions)
-/waha/
+# Evolution API WhatsApp server (credentials + local config)
+/evolution/

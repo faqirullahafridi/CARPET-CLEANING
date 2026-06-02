@@ -12,6 +12,7 @@ import { AddressPicker } from "@/components/address-picker";
 import type { PostcodeLookupResult } from "@/lib/postcodes";
 import { useToast } from "@/hooks/use-toast";
 import { buildBookingWhatsAppMessage, openWhatsAppWithMessage } from "@/lib/whatsapp-booking";
+import { CONTACT } from "@/lib/contact-info";
 
 export default function Book() {
   const [step, setStep] = useState(1);
